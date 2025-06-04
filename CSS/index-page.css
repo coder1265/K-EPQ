@@ -1,0 +1,214 @@
+@charset "utf-8";
+/*		--------Main Body CSS--------		*/
+	.header-placeholder{
+		height: 14.5vh;
+	}
+	#main-image{
+		background-image:url("../Images/Img4.webp"); /* starting background */
+		background-size: cover; /* width is equal to veiwport size */
+		background-repeat: no-repeat;
+		transition: background 1s linear; /* executed once the image changes*/
+		padding: 0;
+		margin: 14vh 0 0 0; /*the placement of the top (required else part of the image will be under the header*/
+		width: 100vw;
+		height: 400px;
+		text-align: center;
+		display: grid; /* veiw in DevTools to see the grid better*/
+		grid-template-rows: 10% 20% 40% 20% 10%;
+		grid-template-columns: 5% auto 2% 2% 2% 2% auto 5%;
+		align-items: center;
+		/* justify-items: center; */
+	}
+	/* main title styles*/
+	.main-headding{
+		font-size: 32px;
+		color: aliceblue;
+	}
+	/* Overlay for the contrast of the main heading. */
+	#read-overlay{
+		background-color:hsla(0,0%,0%,0.84);
+		grid-column: 2/8;
+		grid-row: 3/4;
+		width: 40%;
+		margin-left: 30%;
+		border-radius:3px;
+	}
+	/* The following styles are the styling of the 4 buttons that indicate the image the carrocell is on */
+	.main-image-btn{
+		visibility: hidden;
+		justify-self: center;
+		background-color: hsla(0,0%,25%,0.90);
+	}
+	#mainImage0{
+		grid-column: 3/4;
+		grid-row: 5/6;
+	}
+	#mainImage1{
+		grid-column: 4/5;
+		grid-row: 5/6;
+	}
+	#mainImage2{
+		grid-row: 5/6;
+		grid-column: 5/6;
+	}
+	#mainImage3{
+		grid-row: 5/6;
+		grid-column: 6/7;
+	}
+	/* The purpose of this is to show the buttons on hover over the main image */
+	@media(min-width:700px){
+	#main-image:hover .main-image-btn {
+		visibility: visible;
+		width: 20px;
+		height: 20px;
+		border-radius: 10px;
+	}
+	}
+	/* left button (go left by one image) */
+	#leftImage{
+		font-size: 16px;
+		top: 200px;
+		left: 50px;
+		color: white;
+		visibility: hidden;
+		user-select: none;
+		grid-row: 3/4;
+		grid-column: 1/2;
+	}
+	/* right button (go right by one image) */
+	#rightImage{
+    	top: 200px;
+    	right: 50px;
+    	color: white;
+    	visibility: hidden;
+    	user-select: none;
+    	grid-column: 8/9;
+    	grid-row: 3/4;
+ }
+	/* show on hover */
+	#main-image:hover>#leftImage, #main-image:hover>#rightImage {
+		border-radius: 5em;
+		background-color: hsla(0,0%,50%,0.75);
+		padding: 25px;
+		visibility: visible;
+	}
+
+	.active {
+		background-color: aliceblue;
+	}
+
+/*default media sizes - eventualy use but not current */
+@media (min-width: 640px) {
+    /* Styles for screens medium screens (640px) to larger screens*/
+}
+@media (min-width: 1024px) {
+    /* Styles for screens large screens and wider */
+}
+
+/* The following code is for the products section of the main page */
+/* --------------------------------------------------------------- */
+#products{
+	background-color: #f5f5f5;
+}
+.moreProductsLink{
+	text-decoration:none;
+}
+.moreProductsLink:hover{
+	font-size:120%;
+}
+.prodTitle{
+	margin: 1em;
+	padding: 1em;
+	border-radius: 2em;
+	text-align: center;
+	display:flex;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+}
+.prodCardHolder{
+	display:flex;
+	flex-flow: wrap row;
+	justify-content: space-between;
+	align-items: center;
+	align-content: space-around;
+	flex-wrap: wrap;
+	flex-direction: row;
+	padding: 0 20px;
+}
+.prodCard{
+	flex: auto;
+	margin: 0 5px;
+	background-color:aliceblue;
+	min-width: 320px;
+	max-width:400px;
+	border: 1px solid black;
+	border-radius: 5px;
+	box-shadow: 10px 5px 5px gray;
+}
+.prodCard>img{
+	width: 300px;
+	display: block;
+	margin: auto;
+}
+.prodCard>p{
+	margin-left:5px;
+}
+.orderBar{
+	width:100%;
+	background-color:black;
+	text-align:center;
+	height: 40px;
+}
+.orderBar button{
+	border: 0;
+	background-color:unset;
+	color:whitesmoke;
+	margin-top: 10px;
+}
+.orderBar:hover{
+	opacity: 0.7;
+}
+/* This code is for the blog section (accordions)  */
+/* ----------------------------------------------- */
+
+/*Top level code - width, background color */
+#blogSample{ 
+	width: 90%;
+	margin: 0 5%;
+	background-color: #ccc;
+	border-radius: 10px;
+}
+/* Main title for blog section  */
+#blogTitle{
+	text-align:center;
+	padding-top: 10px;
+}
+h3{ 
+	display:inline;
+}
+#blogTitle>a{
+	cursor:pointer;
+	color: black;
+}
+/* accordion collapsable symbol  */
+.nSymbol{
+	float:right;
+	padding-right:10px;
+}
+.accordion{
+	margin: 1% 0;
+}
+.accContent{
+	display:none;
+	background-color: white;
+	overflow: hidden;
+}
+.open, .accordion:hover{
+	background-color:#bbb;
+}
+
+/* for the easter egg (additional feature in the bottom left of the main page footer.)  */
+#easterEgg1{
+	grid-row: 5/6;
+}
