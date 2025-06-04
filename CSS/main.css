@@ -82,7 +82,7 @@
 }
 @media (max-width: 759px){
 	nav>.flex-item{
-		
+		border:none;
 	}
 }
 	#resource-list{
