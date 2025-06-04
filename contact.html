@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta data -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- page browser name -->
+    <title>Contact lancaster produce.</title>
+	<!-- Favicon links -->
+    <link rel="icon" href="Images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="Images/favicon-32x32.png" type="image/png">
+	<link rel="icon" type="image/png" href="Images/android-chrome-512x512.png">	
+	<!-- my own styling and script for this page -->
+	<link href="CSS/main.css" rel="stylesheet" type="text/css">
+	<link href="CSS/contact-page.css" rel="stylesheet" type="text/css">
+	<script src="js/main.js"></script>
+	<!-- The code below is for the emailjs scripts to send the form emails -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+	</script>
+	<script type="text/javascript">
+	       emailjs.init('k1SzzLOKSMwnPKq2J')
+	</script>
+	<script src="js/sendEmail.js"></script>
+</head>
+<body>
+	<header>
+		<div id="quick-contact">
+			<p id="telephone">T: +44 7585 966114</p>
+			<p id="email">E: <a href="mailto:lancasterproducekv@gmail.com">lancasterproducekv@gmail.com</a></p>
+		</div>
+	  <nav>
+			<a href="index.html#main-image" class="flex-item" >
+				<img src="Images/Logo.png" srcset="" width="40%" alt="Lancaster Produce logo"/>
+			</a>
+			<a href="index.html" class="flex-item nav-link">Home</a>
+			<a href="About us.html" class="flex-item nav-link normalNavLink">About</a>
+			<div class="flex-item">
+				<a href="#" class="flex-item nav-link" id="navResources"> Resources <span id="resouceArrow">&#x25BC;</span></a>
+			</div>
+			<a href="contact.html" class="flex-item nav-link normalNavLink"> Contact </a>
+			<a href="order.html" class="flex-item nav-link callToAction"> Order now</a>
+		</nav>
+	</header>
+	<div id="resource-positioning">
+			<ul id="resource-list">
+				<li class="resource-item"><a href="blog.html">Blog</a></li>
+				<li class="resource-item"><a href="faq.html">FAQ</a></li>
+				<li class="resource-item"><a href="team.html">Meet the team</a></li>
+				<li class="resource-item"><a href="gallery.html">The Hens</a></li>
+			</ul>
+	</div>
+	<main>
+		<section id="contact-section">
+			<form id="form">
+				<div class="field">
+				    <label for="name">Please enter your name:</label>
+				    <input type="text" name="name" id="name" autocomplete="name" required>
+				</div>
+				<div class="field">
+				    <label for="email">Please enter your email address:</label>
+				    <input type="text" name="email" id="email" autocomplete="email" required>
+				</div>
+				<div class="field">
+				    <input type="hidden" name="time" id="time">
+				</div>
+				<div class="field">
+				    <label for="title">Please specify the subject of the email:</label>
+				    <input type="text" name="title" id="title" required>
+				</div>
+				<div class="field">
+					<label for="message">Please enter the message of your email:</label>
+				    <textarea type="text" name="message" id="message" placeholder="message" rows="5" required></textarea>
+				</div>
+				<input type="submit" id="button" value="Send Email" >
+			</form>
+		</section>
+		<hr>
+		<section id="location-section">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d762.0657262273836!2d-0.5329108754485135!3d53.31550226161187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48785968f7a6db57%3A0x12e3cd526731cf03!2sLancaster%20House%20Farm%20Buildings%2C%20Lincoln%20LN2%203PT!5e1!3m2!1sen!2suk!4v1748205772864!5m2!1sen!2suk" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			<p>Our post code: LN2 3PT <br>See full address in the footer <br><a href="https://what3words.com/logged.profile.crackling" title="link to what 3 words">What 3 Words: logged.profile.crackling</a></p>
+			
+		</section>
+		<br>
+	</main>
+	<footer>
+		<p class="f1"> <span>&#9990;</span> +44 7585 966114 </p>
+		<p class="f2"> <span>&#x2709;</span><a href="mailto:lancasterproducekv@gmail.com"> lancasterproducekv@gmail.com</a> </p>
+		<p class="f3">Address:<br> Lancaster House <br> Hackthorn Cliff <br> Lincoln <br>LN2 3PT </p>
+		<a href="terms.html" title="" class="f4">Terms </a>
+		<a href="cookies.html" title="" class="f5">Cookies </a>
+		<p class="f6"><abbr title="Animal and Plant Health Agency"> APHA No: xxxxxxx </abbr>  </p>
+		<a href="sitemap.html" title="" class="f7">Sitemap</a>
+		<p class="f8"> &copy; Lancaster produce 2025. </p>
+	</footer>
+</body>
+</html>
