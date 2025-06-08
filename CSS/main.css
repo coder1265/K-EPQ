@@ -22,7 +22,9 @@
 		z-index: 5;
 		display: block flow;
 	}
-	
+	.bolder{
+		font-size:1.5em;
+	}
 	#quick-contact{
 		display: inline-flex;
 		justify-content: space-around;
@@ -36,6 +38,7 @@
 	}
 	#quick-contact>p{
 		margin: 0.1em;
+		transition: all 0.3s ease-in-out;
 	}
 #email>a{
 	color: black;
@@ -125,4 +128,15 @@
 		color:white;
 		padding: 1em;
 	}
-	
+	/* This has nothing to do except make part of links show on/off hover */
+	.hover-show{
+    /* display:none; */
+    opacity: 0; 
+    margin-right:0;
+    transition: opacity 0.5s ease-in-out, margin-right 0.5s ease-in-out;
+	}
+	.hover-container:hover .hover-show{
+    	display: inline;
+    	opacity: 1;
+    	margin-right:20px;
+	}	

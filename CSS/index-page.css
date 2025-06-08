@@ -30,8 +30,8 @@
 	/* Overlay for the contrast of the main heading. */
 	#read-overlay{
 		background-color:hsla(0,0%,0%,0.84);
-		grid-column: 2/8;
-		grid-row: 3/4;
+		grid-column: 2/3;
+		grid-row: 2/3;
 		width: 40%;
 		margin-left: 30%;
 		border-radius:3px;
@@ -42,22 +42,6 @@
 		justify-self: center;
 		background-color: hsla(0,0%,25%,0.90);
 		display: inline-block;
-	}
-	#mainImage0{
-		grid-column: 3/4;
-		grid-row: 5/6;
-	}
-	#mainImage1{
-		grid-column: 4/5;
-		grid-row: 5/6;
-	}
-	#mainImage2{
-		grid-row: 5/6;
-		grid-column: 5/6;
-	}
-	#mainImage3{
-		grid-row: 5/6;
-		grid-column: 6/7;
 	}
 	/* The purpose of this is to show the buttons on hover over the main image */
 	@media(min-width:425px) {
@@ -76,7 +60,7 @@
 		color: white;
 		visibility: hidden;
 		user-select: none;
-		grid-row: 3/4;
+		grid-row: 2/3;
 		grid-column: 1/2;
 	}
 	/* right button (go right by one image) */
@@ -86,8 +70,8 @@
     	color: white;
     	visibility: hidden;
     	user-select: none;
-    	grid-column: 8/9;
-    	grid-row: 3/4;
+    	grid-column: 3/4;
+    	grid-row: 2/3;
  }
 	/* show on hover */
 	#main-image:hover>#leftImage, #main-image:hover>#rightImage {
@@ -202,10 +186,12 @@ h3{
 	padding-right:10px;
 }
 .accordion{
-	margin-left: 1em;
+	margin:0 1em;
 	padding: 0.5em;
 }
 .accContent{
+	margin:0 1em;
+	padding:0.5em;
 	display:none;
 	background-color: white;
 	overflow: hidden;
