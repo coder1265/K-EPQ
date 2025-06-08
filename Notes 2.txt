@@ -4,3 +4,7 @@ Latest update: 2023-10-15
 For responsive design on my website footer (as it currently wasn't responsive) i implimented a min-max fucntion (changes number of grid collumns based on screen size) and a media query to change the font size of the footer text.
 i found this link "https://css-tricks.com/intrinsically-responsive-css-grid-with-minmax-and-min/" this link led to "https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/"
 and this link "https://www.w3schools.com/css/css_rwd_mediaqueries.asp" helpful examples also it has portrait / landcape media querie examples.
+This didn't exctly break at the breakpoints i wanted as it broke at 432, 864, and 1296px
+If i wanted exact breakpoints i would have to use media queries instead of the minmax function.
+
+I also tweaked the accordion section.
