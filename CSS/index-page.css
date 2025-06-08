@@ -1,8 +1,8 @@
 @charset "utf-8";
 /*		--------Main Body CSS--------		*/
-	/* .header-placeholder{
-		height: 14.5vh;
-	} */
+	body > main{
+		margin:0;
+	}
 	#main-image{
 		background-image:url("../Images/Img4.webp"); /* starting background */
 		background-size: cover; /* width is equal to veiwport size */
@@ -13,8 +13,8 @@
 		height: calc(400px + 14.5vh); /* 400px is the height of the image, 14.5vh is the height of the header */
 		text-align: center;
 		display: grid; /* view in DevTools to see the grid better */
-		grid-template-rows: 10% 60% 10%;
-		grid-template-columns: auto 5%;
+		grid-template-columns: 10% 60% 10%;
+		grid-template-rows: auto 5%;
 		align-items: center;
 		/* justify-items: center; */
 	}
@@ -38,6 +38,7 @@
 		visibility: hidden;
 		justify-self: center;
 		background-color: hsla(0,0%,25%,0.90);
+		display: inline-block;
 	}
 	#mainImage0{
 		grid-column: 3/4;
