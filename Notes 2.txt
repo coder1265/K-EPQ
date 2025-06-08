@@ -7,4 +7,8 @@ and this link "https://www.w3schools.com/css/css_rwd_mediaqueries.asp" helpful e
 This didn't exctly break at the breakpoints i wanted as it broke at 432, 864, and 1296px
 If i wanted exact breakpoints i would have to use media queries instead of the minmax function.
 
-I also tweaked the accordion section.
+I also tweaked the accordion section. and the main image grid
+Furthermore i decided to change the resource dropdown to a colapaseable side nav to do so i:
+added a link to the nav menus and the content was "&#9776;" which is the hamburger icon (3 horizontal lines)
+added a new div with the class "sidenav" and added the links to the resources in it
+

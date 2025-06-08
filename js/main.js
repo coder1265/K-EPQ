@@ -50,4 +50,8 @@ function contactScrolledBy() {
 			quickContactElement.style.display = "inline-flex";
 	  }
 	}
+  function sidenav(){
+    
+  }
+
 });
