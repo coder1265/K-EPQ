@@ -109,7 +109,7 @@
 	}
 	/* Footer css code is here */
 	footer{
-		position: absolute;
+		position: sticky;
 		left: 0;
 		right: 0;
 		background-color: red;
