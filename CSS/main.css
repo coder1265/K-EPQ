@@ -116,8 +116,10 @@
 		color: white;
 		display:grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(27rem, 100%), 1fr));
-		gap: 1px;
+		gap: 10px;
 		justify-content: space-between;
+		justify-items: center;
+		align-items:center;
 		align-content: center;
 		grid-auto-flow: dense;
 	}
