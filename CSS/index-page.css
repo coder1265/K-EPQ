@@ -12,7 +12,7 @@
 		height: calc(400px + 14.5vh); /* 400px is the height of the image, 14.5vh is the height of the header */
 		text-align: center;
 		display: grid; /* view in DevTools to see the grid better */
-		grid-template-columns: 10% 80% 10%;
+		grid-template-columns: 5% 80% 5%;
 		grid-template-rows: 12vh auto 5%;
 		align-items: center;
 		/* justify-items: center; */
@@ -55,8 +55,6 @@
 	/* left button (go left by one image) */
 	#leftImage{
 		font-size: 16px;
-		top: 200px;
-		left: 50px;
 		color: white;
 		visibility: hidden;
 		user-select: none;
@@ -65,19 +63,18 @@
 	}
 	/* right button (go right by one image) */
 	#rightImage{
-    	top: 200px;
-    	right: 50px;
-    	color: white;
-    	visibility: hidden;
-    	user-select: none;
-    	grid-column: 3/4;
-    	grid-row: 2/3;
- }
+		font-size: 16px;
+    		color: white;
+    		visibility: hidden;
+    		user-select: none;
+    		grid-column: 3/4;
+    		grid-row: 2/3;
+ 	}
 	/* show on hover */
 	#main-image:hover>#leftImage, #main-image:hover>#rightImage {
 		border-radius: 5em;
 		background-color: hsla(0,0%,50%,0.75);
-		padding: 25px;
+		padding: 10px;
 		visibility: visible;
 	}
 
