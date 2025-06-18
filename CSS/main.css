@@ -5,6 +5,7 @@
 		font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
 	}
 	body{
+		margin: 0;
 		max-width: 100%;
 		overflow-x: hidden;
 	}
@@ -109,15 +110,17 @@
 	}
 	/* Footer css code is here */
 	footer{
+		padding-top:20px;
 		position: absolute;
 		left: 0;
 		right: 0;
 		background-color: red;
 		color: white;
 		display:grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(27rem, 100%), 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
 		gap: 1px;
 		justify-content: space-between;
+		justify-items: center;
 		align-content: center;
 		grid-auto-flow: dense;
 	}
@@ -128,9 +131,9 @@
 		color:white;
 		padding: 1em;
 	}
+
 	/* This has nothing to do except make part of links show on/off hover */
 	.hover-show{
-    /* display:none; */
     opacity: 0; 
     margin-right:0;
     transition: opacity 0.5s ease-in-out, margin-right 0.5s ease-in-out;
