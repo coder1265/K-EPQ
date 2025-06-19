@@ -24,7 +24,6 @@
 	.main-headding{
 		font-size: 32px;
 		color: aliceblue;
-		font-family: "MV boli";
 		transform:rotateZ(-1deg);
 	}
 	/* Overlay for the contrast of the main heading. */
