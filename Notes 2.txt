@@ -12,3 +12,11 @@ Furthermore i decided to change the resource dropdown to a colapaseable side nav
 added a link to the nav menus and the content was "&#9776;" which is the hamburger icon (3 horizontal lines)
 added a new div with the class "sidenav" and added the links to the resources in it
 
+Latest update: 19/06/2025
+Using 2 site for svgs (found from folling a tutorial on how to use curves in a website - fireship)
+    https://www.shapedivider.app/ - Simple curve SVG
+    https://app.haikei.app/ - complex SVG
+
+Also found this site (https://app.svgator.com/#/) however it doesn't provide required functinality so not used.
+changes on date:
+products section had 2 links -> combined into on link
