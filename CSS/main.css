@@ -237,7 +237,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  background-color: red;
+  background-color: #dd0000;
   color: white;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));

@@ -244,3 +244,15 @@ h3 {
 #easterEgg1 {
   grid-row: 5/6;
 }
+/* for the svg */
+/* ----------- */
+.svg-container {
+  width: 100%;
+  z-index: 2; /* Ensure it appears above other content */
+}
+.svg-container svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Center the SVG */
+}
