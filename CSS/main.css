@@ -1,148 +1,268 @@
 @charset "utf-8";
 
 /*	Fall back styles  */
-	*{
-		font-family:Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
-	}
-	html{
-		scroll-behavior: smooth;
-	}
-	body{
-		margin: 0;
-		max-width: 100%;
-		overflow-x: hidden;
-	}
-	main{
-		margin-top:14.5vh;
-	}
+* {
+  font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+main {
+  margin-top: 14.5vh;
+}
 /*	header styles  */
-	header {
-		background-color: white;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		border-bottom: #dd0000 solid 5px;
-		z-index: 5;
-		display: block flow;
-	}
-	.bolder{
-		font-size:1.5em;
-	}
-	#quick-contact{
-		display: inline-flex;
-		justify-content: space-around;
-		top: 0;
-		width: 100%;
-		padding: 0;
-		margin: 0;
-		background-color: white;
-		color: black;
-		border-bottom: 1px solid;
-	}
-	#quick-contact>p{
-		margin: 0.1em;
-		transition: all 0.3s ease-in-out;
-	}
-#email>a{
-	color: black;
-	text-decoration: none;
+header {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: #dd0000 solid 5px;
+  z-index: 5;
+  display: block flow;
 }
-	nav {
-		display: flex;
-		flex-direction: row;
-		align-items: stretch;
-		justify-content: space-around;
-		flex-wrap: wrap;
-		color: black;
-		flex: auto;
-		flex-flow: row wrap;
-	}
-	.nav-link {
-		align-items: center;
-		color: black;
-		padding: 1em;
-		text-decoration: none;
-		height: auto;
-	}
-.nav-link:active{
-	color: red;
+.bolder {
+  font-size: 1.5em;
 }
-.callToAction:hover{
-	box-shadow: 6px 6px 2px 1px rgb(255 0 0 / 20%);
+#quick-contact {
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  color: black;
+  border-bottom: 1px solid;
 }
-	.flex-item{
-   		justify-content: center;
-   		align-self: center;
- }
-	.callToAction {/* background: #DD0000; */border-radius:20px;border: rgba(255,48,48,0.50) solid 5px;}
-	.callToAction:hover{
-		border: rgba(255,0,0,1) solid 5px;
-	}
-@media (min-width: 760px) {
-    /* Styles for screens large screens tailored to my nav bar*/
-	#resource-positioning{
-		position:relative;
-		left: 56%;
-		width:128px;
-	}
+.animate1 {
+  animation: move 100ms ease-in-out forwards;
 }
-@media (max-width: 759px){
-	nav>.flex-item{
-		border:none;
-	}
+@keyframes move {
+  0% {
+    opacity: 1;
+    height: 100%;
+  }
+  50% {
+    opacity: 0.5;
+    height: 50%;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }
-	#resource-list{
-		z-index: 2;
-		position: absolute;
-		margin-top: 0.3em;
-		padding-inline-start:0;
-		display: none;
-		border: 1px solid #eee;
-	}
-	.resource-item{
-		padding:1em;
-		text-align:center;
-		list-style: none;
-		background-color: white;
-		padding-bottom:5px;
-	}
-	.resource-item>a{
-		text-decoration:none;
-		color:black;
-	}
-	/* Footer css code is here */
-	footer{
-		padding-top:20px;
-		position: absolute;
-		left: 0;
-		right: 0;
-		background-color: red;
-		color: white;
-		display:grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
-		gap: 1px;
-		justify-content: space-between;
-		justify-items: center;
-		align-content: center;
-		grid-auto-flow: dense;
-	}
-	footer *{
-		margin-left: 0.5em;
-	}
-	footer a {
-		color:white;
-		padding: 1em;
-	}
+/* Sidebar styles */
+/* -------------- */
+#sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20%;
+  background-color: #f5f5f5;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(100%);
+  padding-top: 100px;
+  border-left: #dd0000 solid 1px;
+}
+@media only screen and (max-width: 448px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    /* height: 100%; */
+    transform: translateX(100%);
+  }
+}
+@media only screen and (min-width: 449px) and (max-width: 768px) {
+  #sidebar {
+    width: 300px;
+    /* height: 100%; */
+  }
+}
+.animation2 {
+  animation: move2 100ms ease-in-out forwards;
+}
+.animation2-close {
+  animation: move3 100ms ease-in-out forwards;
+}
+@keyframes move2 {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes move3 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+#closeSidebar {
+  font-weight: bold;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px;
+  font-size: large;
+  align-self: flex-start;
+  cursor: pointer;
+}
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  flex-wrap: nowrap;
+  align-self: start;
+}
+.sidebar-container > ul {
+  width: 100%;
+  padding: 0;
+  margin-left: 10px;
+}
+.sidebar-container li {
+  list-style: none;
+  padding: 10px;
+  width: 100%;
+  align-self: flex-end;
+}
+.sidebar-container:hover {
+  background-color: #eee;
+  transition: all 0.1s ease-in-out;
+}
 
-	/* This has nothing to do except make part of links show on/off hover */
-	.hover-show{
-    opacity: 0; 
-    margin-right:0;
-    transition: opacity 0.5s ease-in-out, margin-right 0.5s ease-in-out;
-	}
-	.hover-container:hover .hover-show{
-    	display: inline;
-    	opacity: 1;
-    	margin-right:20px;
-	}	
+#quick-contact > p {
+  margin: 0.1em;
+  /* transition: all 0.3s ease-in-out; */
+}
+#email > a {
+  color: black;
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  color: black;
+  flex: auto;
+  flex-flow: row wrap;
+}
+.nav-link {
+  align-items: center;
+  color: black;
+  padding: 1em;
+  text-decoration: none;
+  height: auto;
+}
+.nav-link:active {
+  color: red;
+}
+.normalNavLink:hover {
+  background-color: #eee;
+  border-radius: 10px;
+}
+.callToAction:hover {
+  box-shadow: 6px 6px 2px 1px rgb(255 0 0 / 20%);
+}
+.flex-item {
+  justify-content: center;
+  align-self: center;
+}
+.callToAction {
+  /* background: #DD0000; */
+  border-radius: 20px;
+  border: rgba(255, 48, 48, 0.5) solid 5px;
+}
+.callToAction:hover {
+  border: rgba(255, 0, 0, 1) solid 5px;
+}
+@media (min-width: 760px) {
+  /* Styles for screens large screens tailored to my nav bar*/
+  #resource-positioning {
+    position: relative;
+    left: 56%;
+    width: 128px;
+  }
+}
+@media (max-width: 759px) {
+  nav > .flex-item {
+    border: none;
+  }
+}
+#resource-list {
+  z-index: 2;
+  position: absolute;
+  margin-top: 0.3em;
+  padding-inline-start: 0;
+  display: none;
+  border: 1px solid #eee;
+}
+.resource-item {
+  padding: 1em;
+  text-align: center;
+  list-style: none;
+  background-color: white;
+  padding-bottom: 5px;
+}
+.resource-item > a {
+  text-decoration: none;
+  color: black;
+}
+/* Footer css code is here */
+footer {
+  padding-top: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: 1px;
+  justify-content: space-between;
+  justify-items: center;
+  align-content: center;
+  grid-auto-flow: dense;
+}
+footer * {
+  margin-left: 0.5em;
+}
+footer a {
+  color: white;
+  padding: 1em;
+}
+
+/* This has nothing to do except make part of links show on/off hover */
+.hover-show {
+  opacity: 0;
+  margin-right: 0;
+  transition: opacity 0.5s ease-in-out, margin-right 0.5s ease-in-out;
+}
+.hover-container:hover .hover-show {
+  display: inline-block;
+  opacity: 1;
+  margin-right: 20px;
+}

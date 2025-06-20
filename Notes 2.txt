@@ -1,5 +1,5 @@
 Latest update: 2023-10-15
-3 main breakpoints for my website are 425px, 768px, and 1024px.
+3 main breakpoints for my website are 448px, 768px, and 1024px.
 
 For responsive design on my website footer (as it currently wasn't responsive) i implimented a min-max fucntion (changes number of grid collumns based on screen size) and a media query to change the font size of the footer text.
 i found this link "https://css-tricks.com/intrinsically-responsive-css-grid-with-minmax-and-min/" this link led to "https://css-tricks.com/look-ma-no-media-queries-responsive-layouts-using-css-grid/"
