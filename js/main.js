@@ -69,8 +69,43 @@ window.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", closeCookieModal);
   document.getElementById("accept-cookies").addEventListener("click", () => {
     closeCookieModal();
+    setCookie("cookie-consent", "accepted", 30); // Set cookie for 30 days
   });
   document.getElementById("reject-cookies").addEventListener("click", () => {
     closeCookieModal();
+    setCookie("cookie-consent", "rejected", 30); // Set cookie for 30 days
   });
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000); // Convert days to milliseconds
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = `${name}=${value}; ${expires}; path=/`;
+  }
+  // c stands for cookie
+  function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let carray = decodedCookie.split(";");
+    for (let i = 0; i < carray.length; i++) {
+      let c = carray[i];
+      while (c.charAt(0) == " ") {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function checkCookieAcceptance(cname) {
+    let cookieToCheck = getCookie(cname);
+    if (cookieToCheck != "") {
+      console.log(`cookie found: ${cookieToCheck}`);
+    } else {
+      document.getElementById("cookie-modal").style.visibility = "visible";
+      document.getElementById("cookie-modal").style.display = "flex";
+    }
+  }
+  checkCookieAcceptance("cookie-consent");
 });
