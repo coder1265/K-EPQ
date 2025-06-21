@@ -54,4 +54,23 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("sidebar").classList.remove("animation2");
     document.getElementById("sidebar").classList.add("animation2-close");
   });
+
+  document.getElementById("cookie-container").addEventListener("click", () => {
+    console.log("Cookie container / icon has been clicked");
+    document.getElementById("cookie-modal").style.visibility = "visible";
+    document.getElementById("cookie-modal").style.display = "flex";
+  });
+  function closeCookieModal() {
+    document.getElementById("cookie-modal").style.display = "none";
+    document.getElementById("cookie-modal").style.visibility = "hidden";
+  }
+  document
+    .getElementById("close-cookie-modal")
+    .addEventListener("click", closeCookieModal);
+  document.getElementById("accept-cookies").addEventListener("click", () => {
+    closeCookieModal();
+  });
+  document.getElementById("reject-cookies").addEventListener("click", () => {
+    closeCookieModal();
+  });
 });
