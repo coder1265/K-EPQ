@@ -31,3 +31,8 @@ latest update: 23/06/2025
 Added some minor changes to index.html
 when finished index.html will coppy and use for every where else (might if i have time change the footer sgv)
 Also fiddled arround with stripe as a payment Option
+Finished cookie.html
+
+
+
+	

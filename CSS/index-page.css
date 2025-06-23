@@ -160,6 +160,7 @@ body > main {
   align-items: center;
 }
 .orderBar > a {
+  width: 100%;
   border: 0;
   background-color: unset;
   color: whitesmoke;
