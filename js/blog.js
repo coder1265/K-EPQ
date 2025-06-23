@@ -1,6 +1,6 @@
 "use strict";
 console.log("Blog script loaded");
-let id = 0;
+// let id = 0;
 const blogContainer = document.getElementById("blog-container");
 const bloglist = document.getElementById("blog-list");
 class Blog {
@@ -21,9 +21,9 @@ class Blog {
   }
 }
 class BlogPost {
+  static nextId = 1;
   constructor(title, content, author, date) {
-    this.id = id;
-    id++;
+    this.id = BlogPost.nextId++;
     this.title = title;
     this.content = content;
     this.author = author;
@@ -104,25 +104,20 @@ const blogPost2 = new BlogPost(
 
 blog.addBlog(blogPost1);
 blog.addBlog(blogPost2);
+console.log(blog);
 function addToDocument() {
-  for (let i = 0; i < blog.getBlogs().length; i++) {
-    bloglist.innerHTML += `<p><a id="bl${blog.getBlogs()[i]["id"]}" title="${
-      blog.getBlogs()[i]["title"]
-    }">${blog.getBlogs()[i]["title"]}</a></p>`;
+  blog.getBlogs().forEach((post, i) => {
+    console.log(post);
+    bloglist.innerHTML += `<p><a id="bl${post.id}" title="${post.title}">${post.title}</a></p>`;
     document
-      .getElementById(`bl${blog.getBlogs()[i]["id"]}`)
+      .getElementById(`bl${post.id}`)
       .addEventListener("click", function () {
-        console.log(
-          `Clicked on blog with ID: ${blog.getBlogs()[i]["id"]}, Title: ${
-            blog.getBlogs()[i]["title"]
-          }`
-        );
-        blogContainer.innerHTML = `<h2>${blog.getBlogs()[i]["title"]}</h2>
-      <p><strong>Author:</strong> ${blog.getBlogs()[i]["author"]}</p>
-      <p><strong>Date:</strong> ${blog.getBlogs()[i]["date"]}</p>
-      <p>${blog.getBlogs()[i]["content"]}</p>`;
+        blogContainer.innerHTML = `<h2>${post.title}</h2>
+      <p><strong>Author:</strong> ${post.author}</p>
+      <p><strong>Date:</strong> ${post.date}</p>
+      <p>${post.content}</p>`;
       });
-  }
+  });
 }
 
 addToDocument();

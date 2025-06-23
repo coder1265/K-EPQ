@@ -1,1 +1,14 @@
 @charset "utf-8";
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  gap: 10px;
+}
+.gallery-image {
+  width: 200px;
+  min-width: 150px;
+}
