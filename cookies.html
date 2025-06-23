@@ -1,17 +1,197 @@
-Hello World! 
-Have a cookie
-<br>
-<pre>
-    Pages:
-        index
-        about
-        blog
-        faq
-        products
-        gallery
-        contact
-        order
-        terms
-        cookies
-        sitemap
-</pre>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Buy local free range eggs and more" />
+    <title>Free range eggs for sale.</title>
+    <link rel="icon" href="Images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="Images/favicon-32x32.png" type="image/png" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="Images/android-chrome-512x512.png"
+    />
+
+    <link href="CSS/main.css" rel="stylesheet" type="text/css" />
+    <link href="CSS/index-page.css" rel="stylesheet" type="text/css" />
+    <!-- This is for the fonts -->
+    <style>
+      @font-face {
+        font-family: "mv_boliregular";
+        src: url("/CSS/mvboli-webfont.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+      h1 {
+        font-family: "mv_boliregular";
+        color: #aaa;
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+    <script src="js/main.js"></script>
+    <script src="js/main2.js"></script>
+  </head>
+  <body>
+    <header>
+      <div id="quick-contact">
+        <p id="telephone">+44 7585 966114</p>
+        <p id="email">
+          <a href="mailto:lancasterproducekv@gmail.com"
+            >lancasterproducekv@gmail.com</a
+          >
+        </p>
+      </div>
+      <nav>
+        <a href="index.html#main-image" class="flex-item">
+          <img
+            src="Images/Logo.png"
+            srcset=""
+            width="40%"
+            alt="Lancaster Produce logo"
+          />
+        </a>
+        <a href="index.html" class="flex-item nav-link normalNavLink">Home</a>
+        <a href="About us.html" class="flex-item nav-link normalNavLink">About</a>
+        </div>
+        <a href="contact.html" class="flex-item nav-link normalNavLink">
+          Contact
+        </a>
+        <a href="order.html" class="flex-item nav-link callToAction">
+          Order now</a
+        >
+        <span class="nav-link flex-item bolder" id="navMenu"
+          >&#9776;</span>
+      </nav>
+    </header>
+    <div id="sidebar">
+	  <div id="closeSidebar">
+		<span aria-label="Close sidebar button">&#10005;</span>
+      </div>
+	  <details class="sidebar-container">
+		<summary>Eggs</summary>
+		<ul>
+			<li>Half a dozen eggs</li>
+			<li>Dozen eggs</li>
+			<li>Two dozen eggs</li>
+			<li>Tray of eggs(30)</li>
+			<li>Custom order (min 6)</li>
+		</ul>
+	  </details>
+	  <details class="sidebar-container">
+		<summary>Wood</summary>
+		<ul>
+			<li>Pallet blocks</li>
+			<li>Kindling</li>
+			<li>Wood chips</li>
+		</ul>
+	  </details>
+	  <details class="sidebar-container">
+		<summary>Other</summary>
+		<ul>
+			<li>Rhubarb</li>
+			  <li>Chickens</li>
+		</ul>
+	  </details>
+	<h3>More:</h3>
+	  <div class="sidebar-container">
+		<a href="blog.html">Blog</a>
+		<br>
+		<a href="faq.html">FAQ</a>
+    <br>
+    <a href="team.html">Meet the team</a>
+    <br>
+    <a href="gallery.html">The Hens</a>
+  </div>
+  </div>
+  <div id="cookie-container">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#f5f5f5" viewBox="0 0 256 256" id="Flat">
+     <path d="M228.43066,111.76758a19.89757,19.89757,0,0,0-16.82714-3.85645,19.99513,19.99513,0,0,1-24.40186-19.28125,19.92083,19.92083,0,0,0-19.82959-19.83105,19.99406,19.99406,0,0,1-19.28223-24.40235,20.01326,20.01326,0,0,0-19.44091-24.39062c-.22559-.001-.44678-.00195-.67188-.00195a107.99982,107.99982,0,1,0,108.01758,107.334v-.001A19.95917,19.95917,0,0,0,228.43066,111.76758Zm-41.0874,75.68262c-32.29883,32.24121-85.18115,32.59375-117.88525.79A83.99965,83.99965,0,0,1,123.84668,44.10352a44.00257,44.00257,0,0,0,39.55078,48.499A44.00432,44.00432,0,0,0,211.897,132.15332,83.31727,83.31727,0,0,1,187.34326,187.4502Zm-20.02954-26.76368a15.99985,15.99985,0,1,1-22.62744,0A15.99941,15.99941,0,0,1,167.31372,160.68652Zm-64-8a15.99985,15.99985,0,1,1-22.62744,0A15.99941,15.99941,0,0,1,103.31372,152.68652Zm-30.62744-33.373a15.99985,15.99985,0,1,1,22.62744,0A15.99963,15.99963,0,0,1,72.68628,119.31348Zm74.62744,16a15.99985,15.99985,0,1,1,0-22.627A15.99977,15.99977,0,0,1,147.31372,135.31348Z"/>
+    </svg>
+  </div>
+  <div id="cookie-modal">
+    <div id="cookie-modal-content">
+      <h3>Cookie Consent </h3>
+      <p id="close-cookie-modal">&times;</p>
+      <p id="cookie-dialog">This website uses cookies to enhance the user experience.</p>
+      <p>Necessary cookies:</p>
+      <label class="switch">
+       <input type="checkbox" checked>
+       <span class="slider round"></span>
+      </label>
+      <p>Recommended cookies:</p>
+      <label class="switch">
+        <input type="checkbox" checked>
+       <span class="slider round"></span>
+      </label>
+      <p>Optional cookies:</p>
+      <label class="switch">
+       <input type="checkbox" checked>
+       <span class="slider round"></span>
+      </label>
+      <button id="accept-cookies" type="button">Accept</button>
+      <button id="reject-cookies" type="button">Reject</button>
+    </div>
+    <main>
+        <section id="cookie-example">
+            <h1>cookie example</h1>
+            <p><span id="demo-text">This is some text that will change when you make a cookie using the form below</span></p>
+            <form>
+              <label for="">Type some text to store</label>
+              <input type="text" id="cookie-input" placeholder="Type here..." />
+              <button type="button" id="set-cookie">Set Cookie</button>
+            </form>
+        </section>
+        <section>
+          <h2>How to remove cookies</h2>
+          <ol>
+            <li>Step 1: click the padlock icon in the left of the search bar</li>
+            <li>Step 2:</li>
+            <li>Step 3:</li>
+            <li>Step 4:</li>
+          </ol>
+          </section>
+    </main>
+  </div>
+     <div class="svg-container">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="visual" viewBox="0 0 900 200" width="900" height="200" version="1.1">
+      <rect x="0" y="0" width="900" height="200" fill="#fff"/>
+      <path d="M0 53L21.5 52.2C43 51.3 86 49.7 128.8 57C171.7 64.3 214.3 80.7 257.2 83.7C300 86.7 343 76.3 385.8 71.8C428.7 67.3 471.3 68.7 514.2 67.8C557 67 600 64 642.8 66C685.7 68 728.3 75 771.2 75.2C814 75.3 857 68.7 878.5 65.3L900 62L900 201L878.5 201C857 201 814 201 771.2 201C728.3 201 685.7 201 642.8 201C600 201 557 201 514.2 201C471.3 201 428.7 201 385.8 201C343 201 300 201 257.2 201C214.3 201 171.7 201 128.8 201C86 201 43 201 21.5 201L0 201Z" fill="#fa7268"/>
+      <path d="M0 127L21.5 124.2C43 121.3 86 115.7 128.8 111.5C171.7 107.3 214.3 104.7 257.2 101.5C300 98.3 343 94.7 385.8 99.5C428.7 104.3 471.3 117.7 514.2 124.7C557 131.7 600 132.3 642.8 133.5C685.7 134.7 728.3 136.3 771.2 135.8C814 135.3 857 132.7 878.5 131.3L900 130L900 201L878.5 201C857 201 814 201 771.2 201C728.3 201 685.7 201 642.8 201C600 201 557 201 514.2 201C471.3 201 428.7 201 385.8 201C343 201 300 201 257.2 201C214.3 201 171.7 201 128.8 201C86 201 43 201 21.5 201L0 201Z" fill="#f55e51"/>
+      <path d="M0 100L21.5 101.3C43 102.7 86 105.3 128.8 111C171.7 116.7 214.3 125.3 257.2 130C300 134.7 343 135.3 385.8 134.7C428.7 134 471.3 132 514.2 129.5C557 127 600 124 642.8 119.5C685.7 115 728.3 109 771.2 106.2C814 103.3 857 103.7 878.5 103.8L900 104L900 201L878.5 201C857 201 814 201 771.2 201C728.3 201 685.7 201 642.8 201C600 201 557 201 514.2 201C471.3 201 428.7 201 385.8 201C343 201 300 201 257.2 201C214.3 201 171.7 201 128.8 201C86 201 43 201 21.5 201L0 201Z" fill="#ee483a"/>
+      <path d="M0 154L21.5 150C43 146 86 138 128.8 135.7C171.7 133.3 214.3 136.7 257.2 142.5C300 148.3 343 156.7 385.8 156C428.7 155.3 471.3 145.7 514.2 145.3C557 145 600 154 642.8 159.3C685.7 164.7 728.3 166.3 771.2 163.2C814 160 857 152 878.5 148L900 144L900 201L878.5 201C857 201 814 201 771.2 201C728.3 201 685.7 201 642.8 201C600 201 557 201 514.2 201C471.3 201 428.7 201 385.8 201C343 201 300 201 257.2 201C214.3 201 171.7 201 128.8 201C86 201 43 201 21.5 201L0 201Z" fill="#e62f21"/>
+      <path d="M0 156L21.5 158.8C43 161.7 86 167.3 128.8 170.5C171.7 173.7 214.3 174.3 257.2 175.8C300 177.3 343 179.7 385.8 179C428.7 178.3 471.3 174.7 514.2 170.2C557 165.7 600 160.3 642.8 159.8C685.7 159.3 728.3 163.7 771.2 168C814 172.3 857 176.7 878.5 178.8L900 181L900 201L878.5 201C857 201 814 201 771.2 201C728.3 201 685.7 201 642.8 201C600 201 557 201 514.2 201C471.3 201 428.7 201 385.8 201C343 201 300 201 257.2 201C214.3 201 171.7 201 128.8 201C86 201 43 201 21.5 201L0 201Z" fill="#dd0000"/>
+    </svg>
+      </div>
+    <footer>
+      <p class="f1"><span>&#9990;</span> +44 7585 966114</p>
+      <p class="f2">
+        <span>&#x2709;</span
+        ><a href="mailto:lancasterproducekv@gmail.com">
+          lancasterproducekv@gmail.com</a
+        >
+      </p>
+      <p class="f3">
+        Address:<br />
+        Lancaster House <br />
+        Hackthorn Cliff <br />
+        Lincoln <br />LN2 3PT
+      </p>
+      <a href="terms.html" title="" class="f4">Terms </a>
+      <a href="cookies.html" title="" class="f5">Cookies </a>
+      <p class="f6">
+        <abbr title="Animal and Plant Health Agency"> APHA No: xxxxxxx </abbr>
+      </p>
+      <a href="sitemap.html" title="" class="f7">Sitemap</a>
+      <p class="f8">&copy; Lancaster produce 2025.</p>
+      <p id="easterEgg1">&nbsp;</p>
+    </footer>
+  </body>
+	  <!-- 
+	        _
+	    .__(.)< (wak wak)
+	     \___)
+	-->
+</html>

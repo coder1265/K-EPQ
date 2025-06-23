@@ -25,3 +25,9 @@ latest update: 21/06/2025
 I have made an cookie icon and modal (the cookie is an SVG found and styled)
 i borrowed the code for the checked text boxes from "https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_switch"
 i used vscode to assist in the coding
+
+latest update: 23/06/2025
+2 days before presentation:
+Added some minor changes to index.html
+when finished index.html will coppy and use for every where else (might if i have time change the footer sgv)
+Also fiddled arround with stripe as a payment Option

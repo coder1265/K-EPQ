@@ -424,3 +424,24 @@ input:checked + .slider:before {
   border-radius: 5px;
   cursor: pointer;
 }
+/* code for the cart */
+#cart {
+  width: 30px;
+  height: 30px;
+}
+#cart-count {
+  visibility: hidden;
+  display: inline-block;
+  position: relative;
+  width: 1em;
+  height: 1em;
+  top: -40px;
+  left: 25px;
+  padding: 0.2em;
+  border: 1px solid white;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+}

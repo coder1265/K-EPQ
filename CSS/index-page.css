@@ -155,12 +155,15 @@ body > main {
   background-color: black;
   text-align: center;
   height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.orderBar button {
+.orderBar > a {
   border: 0;
   background-color: unset;
   color: whitesmoke;
-  margin-top: 10px;
+  text-decoration: none;
 }
 .orderBar:hover {
   opacity: 0.7;
