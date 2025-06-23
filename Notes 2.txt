@@ -33,6 +33,7 @@ when finished index.html will coppy and use for every where else (might if i hav
 Also fiddled arround with stripe as a payment Option
 Finished cookie.html
 
+Chicken-cage.jpg Img1.jpg Img2.jpg Img3.jpg Img4.jpg Img4.webp Img5.jpg Logo.png Logo_small.png Webp/ White chicken with half a dozen eggs.jpg android-chrome-192x192.png android-chrome-512x512.png apple-touch-icon.png bag of wooden blocks.jpg blue-eggs-kitchen.jpg brown-egg-kitchen.jpg chicken near sunset.jpg chicken-profiles/ diodiversity bag.jpg dozen eggs.jpg favicon-16x16.png favicon-32x32.png favicon.ico kindling no sample.jpg kindling with sample.jpg mixed tray of eggs.jpg pallet wood.jpg rhubarb.jpg site.webmanifest white-eggs-kitchen.jpg
 
 
 	
