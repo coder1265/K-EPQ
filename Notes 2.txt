@@ -32,3 +32,16 @@ Added some minor changes to index.html
 when finished index.html will coppy and use for every where else (might if i have time change the footer sgv)
 Also fiddled arround with stripe as a payment Option
 Finished cookie.html
+
+latest update 1/7/2025:
+trialing js fetch api to request blog posts.
+To do:
+Resize 404 page
+Learn catching and lazyloading
+make header or other section fetched(dry - don't repeate yourself)
+add donations link into side menu
+responsive nav (make home link disspere on screen width)
+make order page
+make links on homepage work
+add google anylitics
+

@@ -121,3 +121,20 @@ function addToDocument() {
 }
 
 addToDocument();
+
+async function getPostData(input) {
+  console.log("Fetching data...");
+  const url = input || "Blog%20posts/postNotFound";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const text = await response.text();
+    console.log(text);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+getPostData("/Blog%20posts/post1");
