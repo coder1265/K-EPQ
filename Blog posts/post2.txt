@@ -1,0 +1,8 @@
+We have recently purchased 30 new chickens for our farm!<br>
+15 of these are burford brown chickens, which are known for their high quality egg production and friendly temperament. <br>
+The other 15 are Dekalb white chickens, which are known for their high egg production and hardiness although they are very active. <br>
+<br>
+<img src="/Images/chicken-profiles/Chicken4.jpg" alt="A picture of a chicken" width="300"><br>
+<p> Above is a picture of one of our new burford brown chickens, they are very friendly and love to be around humans (and have lots of treats)</p>
+<img src="Images/chicken-profiles/Chicken13.jpg" alt="A picture of a chicken" width="300"><br>
+<p>Above is a picture of one of our new Dekalb white chickens, they are very active and love to run around (and have lots of treats)</p>

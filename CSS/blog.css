@@ -27,11 +27,6 @@ aside > p {
   border-bottom: 1px solid #ddd;
   cursor: pointer;
 }
-aside > p > a {
-  text-decoration: none;
-  color: black;
-  display: block;
-}
 #main-content {
   flex: 4;
   /* position: relative; */
