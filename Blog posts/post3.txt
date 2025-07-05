@@ -9,5 +9,6 @@ Another project we are considering is getting an portable electric fence
 as this would then ensure portability to enable access to fresh pastures and
 greatly increase the amout of space (far larger than any cage we currently have)
 however this will not be as secure so their is increased risk and this is why we 
-have decided that it will need to be electric.
+have decided that it will need to be electric. <br>
+We would very much support donations that help us achive this goal. <a href="https://buy.stripe.com/3cI00l9Rp96K42n5HPcV208">Donate Now </a>
 </p>
