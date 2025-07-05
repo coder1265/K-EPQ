@@ -1,0 +1,34 @@
+@charset "utf-8";
+/*		--------Order Page CSS--------		*/
+main > :first-child {
+  margin-top: 14vh;
+}
+main {
+  margin: 0;
+  padding: 0.1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+#order-section {
+  height: calc(100vh - 14vh - 190px);
+}
+ul > li {
+  list-style: none;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+ul > li > a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  width: 100%;
+  display: block;
+}
+ul > li:hover {
+  background-color: #f0f0f0;
+}

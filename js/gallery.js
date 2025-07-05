@@ -1,8 +1,6 @@
 "use strict";
 const images = [
   "Chicken-cage.jpg",
-  "Img1.jpg",
-  "Img2.jpg",
   "Img3.jpg",
   "Img4.jpg",
   "Img5.jpg",
