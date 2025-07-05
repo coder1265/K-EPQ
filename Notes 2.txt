@@ -50,3 +50,9 @@ css on donate now link on index.html
 
 latest update 4/7/2025:
 Made fetching work for blog page.
+Checked stripe payments (donated 50p)
+Edited the news accordions on index.html
+
+latest update 5/7/2025:
+Added more payment links
+Minor improvements to code

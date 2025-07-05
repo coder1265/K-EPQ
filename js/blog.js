@@ -18,7 +18,7 @@ posts.push(
     "New Prototype website",
     "/Blog%20posts/post1.txt",
     "Kester Franklin",
-    "2025-7-04"
+    "2025-07-04"
   )
 );
 posts.push(
@@ -27,6 +27,14 @@ posts.push(
     "/Blog%20posts/post2.txt",
     "Kester Franklin",
     "2025-05-09"
+  )
+);
+posts.push(
+  new BlogPost(
+    "New plan for free range chickens",
+    "/Blog%20posts/post3.txt",
+    "Kester Franklin",
+    "2025-007-05"
   )
 );
 
@@ -60,3 +68,20 @@ async function getPostData(input) {
     console.error(error.message);
   }
 }
+
+function loadInitialPost() {
+  try {
+    let url = sessionStorage.getItem("getUrl");
+    if (url) {
+      console.log(`Loading initial post from: ${url}`);
+      getPostData(url);
+      sessionStorage.removeItem("getUrl");
+    } else {
+      console.log("No initial post URL found, loading default post.");
+      console.log(`URL: ${url}`);
+    }
+  } catch (error) {
+    console.error("Error loading initial post:", error);
+  }
+}
+loadInitialPost();
