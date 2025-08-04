@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23 or bust</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        main {
+            min-height: 98vh;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select,
+        button {
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        #welcome {
+            margin-bottom: 20px;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        #game-area {
+            display: none;
+            z-index: 1;
+            width: 95%;
+            height: 100%;
+            position: absolute;
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .choice {
+            width: 90%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            margin: 10px;
+            background-color: cornsilk;
+            padding: 10px;
+            border-bottom: 2px solid peru;
+        }
+
+        .choices {
+            width: 100px;
+            height: 100px;
+            border: 2px solid peru;
+            background-color: burlywood;
+            border-radius: 10%;
+        }
+
+        .choices:hover {
+            background-color: peru;
+            color: white;
+        }
+
+        .choices:disabled {
+            background-color: lightgray;
+            color: darkgray;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section id="welcome">
+            <h1>23 or bust game</h1>
+            <p>Welcome to the 23 or bust game! Choose your mode and start playing.</p>
+            <p>Link to version on transum - <a href="https://www.transum.org/Software/Fun_Maths/23orBust.asp">here</a>
+                <br>
+                To get back to this page reload.
+            </p>
+            <p>Options</p>
+            <form>
+                <label for="selection">Mode:</label>
+                <select id="selection">
+                    <option value="2player">2 player</option>
+                    <option value="singlePlayer">Single player</option>
+                    <option value="Impossible">Impossible</option>
+                </select>
+                <button id="start-game">Start Game</button>
+            </form>
+        </section>
+        <section id="game-area">
+            <h2>Game</h2>
+            <p>Mode: <span id="game-mode">N/A</span></p>
+            <p>Turn: <span id="turn">Player 1</span></p>
+            <p>Total: <span id="total">0</span></p>
+            <div id="game-content"></div>
+        </section>
+    </main>
+    <script>
+        const gameContent = document.getElementById("game-content");
+        const totalDisplay = document.getElementById("total");
+        const turnDisplay = document.getElementById("turn");
+        let lastClicked = null;
+        let turns = 1;
+        let mode;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const selection = document.getElementById("selection");
+            const gameMode = document.getElementById("game-mode");
+            document.getElementById("start-game").addEventListener("click", (e) => {
+                e.preventDefault();  // Prevent form submission
+                console.log("Game started in mode:", selection.value);
+                gameMode.textContent = selection.value;
+                document.getElementById("welcome").style.display = "none";
+                document.getElementById("game-area").style.display = "contents";
+                switch (selection.value) {
+                    case "2player":
+                        twoPlayer();
+                        mode = "2player";
+                        break;
+                    case "singlePlayer":
+                        singlePlayer();
+                        mode = "singlePlayer";
+                        break;
+                    case "Impossible":
+                        imposibleMode();
+                        mode = "Impossible";
+                        break;
+                    default:
+                        console.error("Unknown game mode selected");
+                }
+            });
+        });
+        function twoPlayer() {
+            initalSelection();
+            gameContent.addEventListener('click', function (event) {
+                const targetElement = event.target; // The clicked element
+                if (targetElement.classList.contains('choices')) {
+                    console.log('You clicked:', targetElement.id);
+                    let x;
+                    let switcher = targetElement.id.split('.');
+                    switch (switcher[1]) {
+                        case '1':
+                            x = 1;
+                            break;
+                        case '2':
+                            x = 2;
+                            break;
+                        case '3':
+                            x = 3;
+                            break;
+                        case '4':
+                            x = 4;
+                            break;
+                        case '5':
+                            x = 5;
+                            break;
+                        default:
+
+                    }
+                    add(x);
+                    lastClicked = x;
+                    disableButtons();
+                    nextTurn();
+
+                }
+            });
+        }
+        function singlePlayer() {
+            initalSelection();
+            gameContent.addEventListener('click', function (event) {
+                const targetElement = event.target; // The clicked element
+                if (targetElement.classList.contains('choices')) {
+                    console.log('You clicked:', targetElement.id);
+                    let x;
+                    let switcher = targetElement.id.split('.');
+                    switch (switcher[1]) {
+                        case '1':
+                            x = 1;
+                            break;
+                        case '2':
+                            x = 2;
+                            break;
+                        case '3':
+                            x = 3;
+                            break;
+                        case '4':
+                            x = 4;
+                            break;
+                        case '5':
+                            x = 5;
+                            break;
+                        default:
+
+                    }
+                    add(x);
+                    lastClicked = x;
+                    disableButtons();
+                    computerTurn();
+                    nextTurn();
+                }
+            });
+        }
+        function initalSelection() {
+            gameContent.innerHTML += `
+                <div class="choice" id="${"c" + turns}">
+                    <button class="choices" id="c${turns}.1">1</button>
+                    <button class="choices" id="c${turns}.2">2</button>
+                    <button class="choices" id="c${turns}.3">3</button>
+                    <button class="choices" id="c${turns}.4">4</button>
+                    <button class="choices" id="c${turns}.5">5</button>
+                </div>
+            `;
+        }
+        function nextTurn() {
+            if (lastClicked !== null) {
+                const nextChoices = document.createElement('div');
+                nextChoices.className = 'choice';
+                nextChoices.id = 'c' + ++turns;
+                for (let i = 1; i <= 5; i++) {
+                    if (i == lastClicked) {
+                        continue; // Skip the last clicked number
+                    }
+                    const button = document.createElement('button');
+                    button.className = 'choices';
+                    button.id = `c${turns}.${i}`;
+                    button.textContent = i;
+                    nextChoices.appendChild(button);
+                }
+                gameContent.appendChild(nextChoices);
+            }
+        }
+        function disableButtons() {
+            const buttons = document.querySelectorAll('.choices');
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
+        }
+        function add(value) {
+            const currentTotal = parseInt(totalDisplay.textContent);
+            totalDisplay.textContent = currentTotal + value;
+            if (currentTotal + value == 23) {
+                // alert(`${turnDisplay.textContent} wins! `);
+                setTimeout(() => {
+                    location.reload(); // Reload the page to reset the game
+                }, 3000)
+            } else if (currentTotal + value > 23) {
+                toggleTurn();
+                // alert(`${turnDisplay.textContent} wins! `);
+                setTimeout(() => {
+                    location.reload(); // Reload the page to reset the game
+                }, 3000)
+
+            } else {
+                toggleTurn();
+            }
+        }
+        function computerTurn() {
+            const currentTotal = parseInt(totalDisplay.textContent);
+            let difference = 23 - currentTotal;
+            let computerChoice;
+            if (currentTotal > 18 && difference != lastClicked && lastClicked != null) {
+                computerChoice = difference;
+            } else {
+                computerChoice = Math.floor(Math.random() * 5) + 1;
+                if (computerChoice == lastClicked && lastClicked != 5) {
+                    computerChoice += 1; // Ensure the computer does not choose the last clicked number
+                } else if (computerChoice == lastClicked && lastClicked == 5) {
+                    computerChoice = 1; // Reset to 1 if it exceeds 5
+                }
+            }
+            add(computerChoice);
+        }
+        function toggleTurn() {
+            const currentTurn = turnDisplay.textContent;
+            if (mode === "2player") {
+                turnDisplay.textContent = currentTurn === "Player 1" ? "Player 2" : "Player 1";
+            } else {
+                turnDisplay.textContent = currentTurn === "Player 1" ? "Computer" : "Player 1";
+            }
+            console.log("toggled")
+        }
+        function imposibleMode() {
+            gameContent.innerHTML += `<p>In impossible mode the computer always starts (and therfor can always win). <br> The computer chose 5:</p>`;
+            add(5);
+            toggleTurn();
+            lastClicked = 5;
+            nextTurn();
+            gameContent.addEventListener('click', function (event) {
+                const targetElement = event.target; // The clicked element
+                if (targetElement.classList.contains('choices')) {
+                    console.log('You clicked:', targetElement.id);
+                    let x;
+                    let switcher = targetElement.id.split('.');
+                    switch (switcher[1]) {
+                        case '1':
+                            x = 1;
+                            break;
+                        case '2':
+                            x = 2;
+                            break;
+                        case '3':
+                            x = 3;
+                            break;
+                        case '4':
+                            x = 4;
+                            break;
+                        case '5':
+                            x = 5;
+                            break;
+                        default:
+
+                    }
+                    add(x);
+                    lastClicked = x;
+                    disableButtons();
+                    impossibleTurn();
+                }
+            });
+        }
+        function impossibleTurn() {
+            const currentTotal = parseInt(totalDisplay.textContent);
+            if (currentTotal < 10) {
+                let choice = 10 - currentTotal;
+                if (choice == lastClicked) {
+                    console.log("error in computer second turn");
+                }
+                add(choice);
+                lastClicked = choice;
+                gameContent.innerHTML += `<p>Computer chose ${choice}:</p>`;
+                nextTurn();
+            }
+            if (currentTotal > 10 && currentTotal < 16) {
+                let x1;
+                switch (currentTotal) {
+                    case 11:
+                        x1 = 2;
+                        break;
+                    case 12:
+                        x1 = 1;
+                        break;
+                    case 13:
+                        x1 = 3;
+                        break;
+                    case 14:
+                        x1 = 2;
+                        break;
+                    case 15:
+                        x1 = 1;
+                        break;
+                    default:
+                        console.error("Unexpected total in impossible mode:", currentTotal);
+                }
+                add(x1);
+                lastClicked = x1;
+                gameContent.innerHTML += `<p>Computer chose ${x1}:</p>`;
+                nextTurn();
+            }
+            if (currentTotal == 17 && lastClicked != 3) {
+                x1 = 3;
+                add(x1);
+                lastClicked = x1;
+                gameContent.innerHTML += `<p>Computer chose ${x1}:</p>`;
+                nextTurn();
+            }
+            if (currentTotal >= 18) {
+                for (let i = 1; i <= 5; i++) {
+                    if (currentTotal + i == 23 && i != lastClicked) {
+                        add(i);
+                        lastClicked = i;
+                        gameContent.innerHTML += `<p>Computer chose ${i}:</p>`;
+                        nextTurn();
+                        break;
+                    }
+                }
+            }
+            // toggleTurn();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kesters version of chess</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        #chess-board {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            width: calc(var(--size) * 16);
+            height: calc(var(--size) * 16);
+            margin: 20px auto;
+            border: 2px solid #000;
+        }
+
+        .square {
+            --size: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--size);
+            color: #fff;
+            width: var(--size);
+            height: var(--size);
+        }
+
+        #info-pannel {
+            z-index: 2;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 50vw;
+            height: 100vh;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #game-info {
+            z-index: 2;
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            width: 50vw;
+            height: 100vh;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .turn-option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .game-option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .info-option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #rules {
+            background-color: antiquewhite;
+            z-index: 3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100vw;
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="info-pannel">
+        <p>Properties:</p>
+        <div id="properties">
+
+        </div>
+        <button type="button" id="showComsRange" class="turn-option" onclick="showComsRange();" disabled>Show Your
+            Pieces communication Range (disabled)</button>
+        <button type="button" id="endTurn" class="turn-option" onclick="updateGameInfo();">end your
+            turn</button>
+    </div>
+    <div id="chess-board">
+
+    </div>
+    <div id="game-info">
+        <h2>Game Info</h2>
+        <p>Turn: <span id="turn">White</span></p>
+        <p>Number of Turns: <span id="numTurns">0</span></p>
+        <p id="gameOver" style="display:none;">Game Over!</p>
+        <p id="winner" style="display:none;"></p>
+        <button type="button" id="startGame" class="game-option"
+            onclick="startGame();alert('press space to toggle the info pannel');">Start Game</button>
+        <button type="button" id="resetGame" class="game-option" onclick="location.reload()">Reset Game</button>
+        <p>If things dont work as expected then try double clicking on the piece you want to move. Please see rules for
+            further info</p>
+        <br>
+        <hr><br>
+        <button type="button" class="info-option" id="highlightToggle" onclick="highlightColor();">highlight your
+            pieces</button>
+        <button type="button" class="info-option" onclick="highlightActPoints();">highlight your pieces that have
+            ativity points</button>
+        <button type="button" class="info-option" id="rule-button" onclick="toggleRules();">View rules</button>
+    </div>
+    <div id="rules">
+        <h1>Rules / How to play</h1>
+        <button type="button" class="info-option" onclick="toggleRules()">Close</button>
+        <ul>
+            <li>No editing this code!!</li>
+            <li>Rooks / castles donot move (they should be able to capture ajacent pieces)</li>
+            <li>The king and queen are equal.</li>
+            <li>The king and queen are the sources of communication and therfor a piece must be within one of their
+                communication ranges (blue) or in a chain</li>
+            <li>If a villiage is able to i.e. every four turns it is able to spawn a pawn if a square is free</li>
+            <li>Press e to end turn</li>
+            <li></li>
+        </ul>
+        <p>New features coming soon</p>
+        <ul>
+            <li>Missions (give pieces preset routes so they dont need to be in communication range)</li>
+            <li>Increased village functionality</li>
+            <li>Types of Pawns (specialisation)</li>
+            <li>Reccruitment of pieces (pawns mainly)</li>
+            <li>Non jumpble pieces as currently all pieces can jump (though some dont have the range - pawns,
+                rooks/castles)</li>
+            <li>Cyleing through pieces</li>
+            <li>Updated graphics</li>
+            <li>Undoing move(s)</li>
+            <li>Adaptive range (i.e. see what your move will do)</li>
+        </ul>
+    </div>
+    <script>
+        // Function to check surrounding squares for the rook
+        function checkSurroundingSquaresRook(square) {
+            const surroundingSquares = [];
+            const directions = [
+                [-1, -1], [-1, 0], [-1, 1],
+                [0, -1], [0, 1],
+                [1, -1], [1, 0], [1, 1]
+            ];
+            for (const [dx, dy] of directions) {
+                const newSquare = document.getElementById(`${square.charAt(0).toUpperCase()}${parseInt(square.charAt(1)) + dy}`);
+                if (newSquare) {
+                    surroundingSquares.push(newSquare);
+                }
+            }
+            return surroundingSquares; // This is an array of the squares and not the pieces in the squares.
+        }
+        // Function to change square notation to coordinate system (square e.g. 'A1') -> (0,1)
+        function changeSquareToCoordinate(square) {
+            try {
+                const colLetter = square.charAt(0).toUpperCase();
+                const col = alphabet.indexOf(colLetter);
+                if (col === -1) {
+                    console.error("Invalid column letter:", colLetter);
+                    return null;
+                }
+                const row = parseInt(square.slice(1));
+                return { col, row };
+            } catch (error) {
+                console.error(square)
+                console.error(error)
+            }
+
+        }
+        // Function to change coordinate system back to square notation e.g. (0,1) -> 'A1'
+        function changeCoordinateToSquare(coordinate) {
+            const colLetter = alphabet[coordinate.col];
+            if (colLetter === undefined) {
+                console.error("Invalid column index:", coordinate.col);
+                return null;
+            }
+            const row = coordinate.row;
+            return `${colLetter}${row}`;
+        }
+        // Below: colors all the squares back to the default color and reapplies the chess pieces ~(every click)
+        function resetBoard() {
+            const squares = document.querySelectorAll('.square');
+            squares.forEach(square => {
+                square.style.backgroundColor = '#aaa';
+                square.innerHTML = '';
+                square.style.border = '1px solid #ccc';
+            });
+            chessPiece.allPieces.forEach(piece => {
+                const square = document.getElementById(piece.position);
+                if (square) {
+                    square.innerHTML = piece.symbol;
+                    square.style.color = piece.color === 'white' ? '#fff' : '#000';
+                }
+            });
+        }
+
+        function rangeSquares(color) {
+            let king1 = null;
+            let queen1 = null;
+            if (color == 'white') {
+                king1 = whiteKing
+                queen1 = whiteQueen
+            } else if (color == 'black') {
+                king1 = blackKing
+                queen1 = blackQueen
+            } else {
+                console.error("Invalid color:", color);
+                return;
+            }
+            let rangeSquaresArr = [];
+            let processed = new Set(); // Track processed pieces
+
+            function addPieceToRange(piece) {
+                if (processed.has(piece)) return; // Avoid infinite recursion
+                processed.add(piece);
+
+                const pieceCoord = changeSquareToCoordinate(piece.position);
+                piece.communication.forEach(move => {
+                    let calc1 = pieceCoord.col + move[0];
+                    let calc2 = pieceCoord.row + move[1];
+
+                    if (calc1 < 0 || calc1 > size || calc2 < 0 || calc2 > size) {
+                        // console.log("This is out of range calc1", calc1, "calc2", calc2)
+                        return;
+                    }
+                    let targetPos = changeCoordinateToSquare({ col: calc1, row: calc2 });
+                    let check = chessPiece.getPieceByPosition(targetPos);
+                    let squareStatus = null;
+                    if (check && check.color === color) {
+                        squareStatus = 'G';
+                        check.inRange = true;
+                        addPieceToRange(check); // Chain to friendly piece
+                    } else if (check && check.color !== color) {
+                        squareStatus = 'R';
+                    } else {
+                        squareStatus = 'E';
+                    }
+                    rangeSquaresArr.push([calc1, calc2, squareStatus]);
+                });
+            }
+            const allPieces = chessPiece.getAllActivePieces();
+
+            // King and Queen are the origin and always in range
+            if (color === 'white') {
+                if (allPieces.includes(whiteKing)) {
+                    rangeSquaresArr.push([changeSquareToCoordinate(king1.position).col, changeSquareToCoordinate(king1.position).row, 'O']);
+                    addPieceToRange(king1);
+                }
+                if (allPieces.includes(whiteQueen)) {
+                    rangeSquaresArr.push([changeSquareToCoordinate(queen1.position).col, changeSquareToCoordinate(queen1.position).row, 'O']);
+                    addPieceToRange(queen1);
+                }
+            }
+            if (color === 'black') {
+                if (allPieces.includes(blackKing)) {
+                    rangeSquaresArr.push([changeSquareToCoordinate(king1.position).col, changeSquareToCoordinate(king1.position).row, 'O']);
+                    addPieceToRange(king1);
+                }
+                if (allPieces.includes(blackQueen)) {
+                    rangeSquaresArr.push([changeSquareToCoordinate(queen1.position).col, changeSquareToCoordinate(queen1.position).row, 'O']);
+                    addPieceToRange(queen1);
+                }
+            }
+
+            for (const piece of allPieces) {
+                if (piece.color === color) {
+                    const pieceCoord = changeSquareToCoordinate(piece.position);
+                    // Check if this piece's coordinates are in rangeSquaresArr
+                    const inRange = rangeSquaresArr.some(([col, row]) =>
+                        col === pieceCoord.col && row === pieceCoord.row
+                    );
+                    if (!inRange) {
+                        piece.inRange = false;
+                    }
+                }
+            }
+
+            return rangeSquaresArr;
+        }
+
+        function showMoveBoarder(movementObject) {
+            lastSelectedPiece = movementObject
+            const startPos = changeSquareToCoordinate(movementObject.position)
+            // double checking the piece is able to move
+            if (movementObject.inRange === true) {
+                if (movementObject.actPoints > 0 && movementObject.color == turn && movementObject.name !== 'Rook') {
+                    movementObject.moveArray.forEach(array => {
+                        let x = startPos.col + array[0];
+                        let y = startPos.row + array[1];
+                        if (x < 0 || x > size || y < 1 || y > size) {
+                            return; // Skip invalid moves
+                        }
+                        let pos = changeCoordinateToSquare({ col: x, row: y })
+                        let check = chessPiece.getPieceByPosition(pos)
+                        if (check) {
+                            if (check.color !== movementObject.color) {
+                                document.getElementById(pos).style.border = '3px solid #f00';
+                            } else {
+                                return;
+                            }
+                        }
+                        movmentPositions.add(pos)
+                        document.getElementById(pos).style.border = '3px solid yellow';
+                    });
+                } else if (movementObject.actPoints > 0 && movementObject.color == turn && movementObject.name === 'Rook') {
+                    // this statment allows rooks to capture enemy pieces
+                    rookAttack.clear();
+                    movementObject.moveArray.forEach(array => {
+                        let x = startPos.col + array[0];
+                        let y = startPos.row + array[1];
+                        if (x < 0 || x > size || y < 1 || y > size) {
+                            return; // Skip invalid moves
+                        }
+                        let pos = changeCoordinateToSquare({ col: x, row: y })
+                        let check = chessPiece.getPieceByPosition(pos)
+                        if (check) {
+                            if (check.color !== movementObject.color) {
+                                document.getElementById(pos).styborder = '3px solid #f00';
+                                rookAttack.add(pos)
+                            }
+                        }
+                    })
+                } else {
+                    console.log("Movment is invalid for movment object:", movementObject)
+                }
+            }
+        }
+
+        // highlights the range reach, each piece and the piece selected in differnet colors
+        function highlightSquares(objectPiece) {
+            if (objectPiece === null || objectPiece === undefined) {
+                console.error("No piece selected for highlighting squares.");
+                return;
+            }
+            if (objectPiece.name !== 'king' || objectPiece.name !== 'queen') {
+                let range = rangeSquares(objectPiece.color);
+                for (let i = 0; i < range.length; i++) {
+                    const square = document.getElementById(changeCoordinateToSquare({ col: range[i][0], row: range[i][1] }));
+                    if (square) {
+                        if (range[i][2] === 'O') {
+                            square.style.backgroundColor = 'purple'; // Purple for origin
+                        } else if (range[i][2] === 'G') {
+                            square.style.backgroundColor = 'green'; // Green for friendly pieces
+                        } else if (range[i][2] === 'R') {
+                            square.style.backgroundColor = 'red'; // Red for enemy pieces
+                        } else if (range[i][2] === 'E') {
+                            square.style.backgroundColor = 'blue'; // Blue for empty squares
+                        }
+                    }
+                }
+                document.getElementById(objectPiece.position).style.backgroundColor = '#D8B93C'; // selected piece
+            }
+            try {
+                if (objectPiece.inRange) {
+
+                } else {
+                    document.getElementById(objectPiece.position).style.backgroundColor = '#555';
+
+                }
+            } catch (e) {
+                console.error("Error in highlightSquares function:", e);
+            }
+        }
+        // highlights all peices of the games turn color.
+        function highlightColor() {
+            const color = turn;
+            let iterable = chessPiece.getAllActivePieces();
+            for (const i in iterable) {
+                const piece = iterable[i];
+                if (piece.color === color) {
+                    document.getElementById(piece.position).style.backgroundColor = '#D8B93C';
+                }
+            }
+        }
+        // classes to create chess pieces
+        class chessPiece {
+            static allPieces = [];
+            static getAllActivePieces() {
+                return chessPiece.allPieces;
+            }
+            static getPieceByPosition(position) {
+                // position should be a string like 'A1', 'B2', etc.
+                return chessPiece.allPieces.find(piece => piece.position === position);
+            }
+            static removePiece(piece) {
+                const index = chessPiece.allPieces.indexOf(piece);
+                if (index !== -1) {
+                    chessPiece.allPieces.splice(index, 1);
+                }
+            }
+            constructor(name, color, symbol) {
+                this.name = name;
+                this.color = color;
+                this.symbol = symbol;
+                this.position = null;
+                this.inRange = false;
+                chessPiece.allPieces.push(this);
+            }
+        }
+        // King class
+        class king extends chessPiece {
+            constructor(color, position) {
+                super('King', color, color === 'white' ? '&#9812;' : '&#9818;');
+                this.moveArray = [[2, 0], [1, 0], [-1, -1], [-1, 1], [0, -2], [0, -1], [0, 2], [0, 1], [1, -1], [1, 0], [2, 0], [1, 1]];
+                this.communication = [[-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2], [-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2], [0, -2], [0, -1], [0, 0], [0, 1], [0, 2], [1, -2], [1, -1], [1, 0], [1, 1], [1, 2], [2, -2], [2, -1], [2, 0], [2, 1], [2, 2]];
+                this.position = position;
+                this.inRange = true;
+                this.actPoints = 1;
+                this._maxAct = 1;
+            }
+
+        }
+        // Queen class
+        class queen extends chessPiece {
+            constructor(color, position) {
+                super('Queen', color, color === 'white' ? '&#9813;' : '&#9819;');
+                this.moveArray = [[-2, 0], [-1, -1], [-1, 0], [-1, 1], [0, -2], [0, -1], [0, 2], [0, 1], [1, -1], [1, 0], [2, 0], [1, 1]];
+                this.communication = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
+                this.position = position;
+                this.inRange = true;
+                this.actPoints = 1;
+                this._maxAct = 1;
+            }
+        }
+        // Rook class
+        class rook extends chessPiece {
+            constructor(color, position) {
+                super('Rook', color, color === 'white' ? '&#9814;' : '&#9820;');
+                this.moveArray = [[-1, 0], [0, -1], [0, 1], [1, 0]];
+                this.communication = [[-2, -2], [-2, -1], [-2, 0], [-2, 1], [-2, 2], [-1, -2], [-1, -1], [-1, 0], [-1, 1], [-1, 2], [0, -2], [0, -1], [0, 0], [0, 1], [0, 2], [1, -2], [1, -1], [1, 0], [1, 1], [1, 2], [2, -2], [2, -1], [2, 0], [2, 1], [2, 2]];
+                this.position = position;
+                this.actPoints = 2;
+                this._maxAct = 2;
+            }
+            checkSides() {
+                let squareCount = 0;
+                let rookCount = 0;
+                let enemyCount = 0;
+                checkSurroundingSquaresRook(this.position).forEach(square => {
+                    if (square) {
+                        const piece = chessPiece.getPieceByPosition(square.id);
+                        if (piece == undefined) {
+                            return
+                        }
+                        squareCount++;
+                        if (piece.name === 'Rook') {
+                            rookCount++;
+                        } else if (piece.color !== this.color) {
+                            enemyCount++;
+                        }
+                    }
+                });
+                if (squareCount === 8 && (rookCount + enemyCount) === 8) {
+                    removePiece(this);
+                    alert(`You have lost your ${this.name} piece! as it was surrounded`);
+                }
+            }
+        }
+        //Bishop class
+        class bishop extends chessPiece {
+            constructor(color, position) {
+                super('Bishop', color, color === 'white' ? '&#9815;' : '&#9821;')
+                this.moveArray = [[-1, 0], [0, -1], [0, 1], [1, 0]]
+                this.communication = [
+                    [-3, 0], [-2, -1], [-2, 0], [-2, 1], [-1, -2], [-1, -1],
+                    [-1, 0], [-1, 1], [-1, 2], [0, -3], [0, -2], [0, -1],
+                    [0, 1], [0, 2], [0, 3], [1, -2], [1, -1], [1, 0],
+                    [1, 1], [1, 2], [2, -1], [2, 0], [2, 1], [3, 0]
+                ]
+                this.position = position;
+                this.inRange = false;
+                this.actPoints = 1;
+                this._maxAct = 1;
+            }
+        }
+        //Knight class
+        class knight extends chessPiece {
+            constructor(color, position) {
+                super('Knight', color, color === 'white' ? '&#9816;' : '&#9822;');
+                this.moveArray = [
+                    [-3, 0], [-2, -1], [-2, 0], [-2, 1], [-1, -2], [-1, -1],
+                    [-1, 0], [-1, 1], [-1, 2], [0, -3], [0, -2], [0, -1],
+                    [0, 1], [0, 2], [0, 3], [1, -2], [1, -1], [1, 0],
+                    [1, 1], [1, 2], [2, -1], [2, 0], [2, 1], [3, 0]
+                ]
+                this.communication = [
+                    [-3, 0], [-2, 0], [-1, -1], [-1, 0], [-1, 1], [0, -1], [0, -2], [0, -3], [0, 1], [0, 2], [0, 3], [1, -1], [1, 0], [2, 0], [3, 0], [1, 1]
+                ];
+                this.position = position;
+                this.inRange = false;
+                this.actPoints = 1;
+                this._maxAct = 1;
+            }
+        }
+        //Pawn/soldier class
+        class pawn extends chessPiece {
+            constructor(color, position) {
+                super('Pawn', color, color === 'white' ? '&#9817;' : '&#9823;');
+                this.moveArray = [
+                    [-1, 0], [0, 1], [0, -1], [1, 0]
+                ];
+                this.communication = [
+                    [-1, 0], [0, 1], [0, -1], [1, 0]
+                ];
+                this.position = position;
+                this.inRange = false;
+                this.actPoints = 1;
+                this._maxAct = 1;
+                this.type = 'pawn';
+            }
+            changeType() {
+                // code to change pawn types goes here (i.e. soldier, farmer, recruiter, shieldBearer, trumpeter)
+            }
+        }
+        // village class
+        class village extends chessPiece {
+            constructor(position, type) {
+                let color
+                if (parseInt(position.slice(1)) > 8) {
+                    color = 'black'
+                } else {
+                    color = 'white'
+                }
+                super('Village', color, '&#127960;')
+                this.moveArray = [[0, 0]]
+                this.communication = [[0, 0]]
+
+                this.position = position;
+                this.type = type;
+                this.timeToSpawn = 2;
+                this.spawnCap = 0;
+                this._maxSpawnCap = 2;
+            }
+            captured(captureColor) {
+                this.color = captureColor
+            }
+            spawnPawn() {
+                const places = [] //[0, -1], [1, 0], [-1, 0], [0, 1]
+                if (this.color == 'white') {
+                    places.push([0, -1])
+                    if (parseInt(alphabet.indexOf(this.position.charAt(0).toUpperCase())) >= 8) {
+                        places.push([-1, 0]);
+                        places.push([1, 0]);
+                    } else {
+                        places.push([1, 0]);
+                        places.push([-1, 0]);
+                    }
+                    places.push([0, 1])
+                }
+                if (this.color == 'black') {
+                    places.push([0, 1])
+                    if (parseInt(alphabet.indexOf(this.position.charAt(0).toUpperCase())) >= 8) {
+                        places.push([-1, 0]);
+                        places.push([1, 0]);
+                    } else {
+                        places.push([1, 0]);
+                        places.push([-1, 0]);
+                    }
+                    places.push([0, -1])
+                }
+                let resposiveCode = ''
+                if (numTurns % 4 === 0) {
+                    for (let i = 0; i < places.length; i++) {
+                        let pos = changeSquareToCoordinate(this.position)
+                        let nums = { col: (pos.col + places[i][0]), row: (pos.row + places[i][1]) }
+                        let square = changeCoordinateToSquare(nums)
+                        let insideSquare = chessPiece.getPieceByPosition(square)
+                        if (!insideSquare) {
+                            resposiveCode = `const ${this.color}Pawn = new pawn('${this.color}', '${square}');`;
+                            console.log(square)
+                            eval(resposiveCode);
+                            resetBoard()
+                            return;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        // variables -------------------------------------------
+        const board = document.getElementById('chess-board');
+        const size = 16;
+        // const squareSize = "50px";
+        const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        const propertyDisplay = document.getElementById('properties');
+        let turn = 'white';
+        let numTurns = 0;
+        let gameOver = false;
+        let gameStarted = false;
+        let winner = null;
+        let selectedPiece = null;
+        let lastSelectedPiece = null;
+        let movmentPositions = new Set(); // this is for storing the spaces that you can move to (to enable multiclick.)
+        let rookAttack = new Set(); // So rooks may attack peices surrounding them
+
+        // Create the chess board
+        for (let row = 0; row < size; row++) {
+            const rowDiv = document.createElement('div');
+            rowDiv.style.display = 'flex';
+            for (let col = 0; col < size; col++) {
+                const square = document.createElement('div');
+                square.id = `${alphabet[col]}${row + 1}`;
+                square.title = `${alphabet[col]}${row + 1}`;
+                square.classList.add('square');
+                // square.style.width = squareSize;
+                // square.style.height = squareSize;
+                square.style.backgroundColor = '#aaa';
+                square.style.border = '1px solid #ccc';
+                rowDiv.appendChild(square);
+            }
+            board.appendChild(rowDiv);
+        }
+
+        // Create chess pieces -------------------------
+        //White pieces
+        const whiteKing = new king('white', 'H1');
+        const whiteQueen = new queen('white', 'I1');
+        const whiteBishop1 = new bishop('white', 'G2');
+        const whiteBishop2 = new bishop('white', 'J2');
+        const whiteKnight1 = new knight('white', 'H2');
+        const whiteKnight2 = new knight('white', 'I2');
+        const whitePawns = ['B3', 'G1', 'J1', 'H3', 'I3', 'O3', 'D5', 'M5']
+        whitePawns.forEach(postion => {
+            const whitePawn = new pawn('white', postion);
+        })
+        // white villages
+        const whiteVillages = ['B2', 'O2']
+        whiteVillages.forEach(position => {
+            const whiteVillage = new village(position, 'farm')
+        })
+        // making white fortress
+        let whiteRookPlacement = ['F1', 'F2', 'F3', 'G3', 'J3', 'K3', 'K2', 'K1', 'F7', 'K7'];
+        whiteRookPlacement.forEach(position => {
+            const whiteRook = new rook('white', position);
+        });
+
+        //Black pieces
+        const blackKing = new king('black', 'H16');
+        const blackQueen = new queen('black', 'I16');
+        const blackBishop1 = new bishop('black', 'G15');
+        const blackBishop2 = new bishop('black', 'J15');
+        const blackKnight1 = new knight('black', 'H15');
+        const blackKnight2 = new knight('black', 'I15');
+        const blackPawns = ['D12', 'M12', 'B14', 'G16', 'J16', 'H14', 'I14', 'O14']
+        blackPawns.forEach(postion => {
+            const blackPawn = new pawn('black', postion);
+        })
+        // black villages
+        const blackVillages = ['B15', 'O15'];
+        blackVillages.forEach(position => {
+            const blackVillage = new village(position, 'farm');
+        });
+        // making black fortress
+        let blackRookPlacement = ['F16', 'F15', 'F14', 'G14', 'J14', 'K14', 'K15', 'K16', 'F10', 'K10'];
+        blackRookPlacement.forEach(position => {
+            const blackRook = new rook('black', position);
+        });
+
+        board.addEventListener('click', (event) => {
+            const target = event.target;
+            //if you click on a square
+            if (target.tagName === 'DIV' && target.classList.contains('square') && target.id) {
+                const position = target.id;
+                const piece = chessPiece.getPieceByPosition(position); // the peice object
+                if (movmentPositions.has(position) && lastSelectedPiece) {
+                    chessPiece.removePiece(chessPiece.getPieceByPosition(position))
+                    lastSelectedPiece.position = position;
+                    lastSelectedPiece.actPoints--;
+                    movmentPositions.clear();
+                }
+                if (rookAttack.has(position) && piece.color !== lastSelectedPiece.color) {
+                    chessPiece.removePiece(piece)
+                    lastSelectedPiece.actPoints--;
+                    rookAttack.delete(position)
+                }
+                resetBoard();
+                // if you select a piece
+                if (piece && piece !== undefined && piece.name !== '') {
+                    // if it is not your turn
+                    if (turn % 2 === 0 && piece.color === 'black' || turn % 2 === 1 && piece.color === 'white') {
+                        alert("It's not your turn!");
+                        return;
+                    } else {
+                        //it is your turn
+                        propertyDisplay.innerHTML = '';
+                        Object.keys(piece).forEach(key => {
+                            if (key !== 'moveArray' && key !== 'communication' && key !== '_maxAct') {
+                                propertyDisplay.innerHTML += `<p>${key}: ${piece[key]}</p>`;
+                            } else {
+                                // propertyDisplay.innerHTML += `<p>${key}:</p> <ul>`;
+                                // for (let i = 0; i < piece[key].length; i++) {
+                                //     propertyDisplay.innerHTML += `<li>|${piece[key][i]}|</li>`
+                                // }
+                                // propertyDisplay.innerHTML += `</ul>`
+                            }
+                        })
+                        highlightSquares(piece);
+                        if (parseInt(piece.actPoints) > 0 && piece.inRange === true) {
+                            showMoveBoarder(piece);
+
+                        }
+                    }
+                }
+            }
+        });
+
+        // Toggle info panel visibility
+        window.addEventListener('keydown', (event) => {
+            if (event.key === ' ') {
+                if (!gameStarted) {
+                    startGame();
+                    console.log("Game started");
+                }
+                event.preventDefault();
+                const pannels = document.querySelectorAll('#info-pannel, #game-info');
+                pannels.forEach(pannel => {
+                    if (pannel.style.display === 'none' || pannel.style.display === '') {
+                        pannel.style.display = 'block';
+                    } else {
+                        pannel.style.display = 'none';
+                    }
+                });
+            } else if (event.key === 'e') {
+                updateGameInfo();
+            }
+        });
+
+        function highlightActPoints() {
+            console.log("highlightActPoints called")
+            const all = chessPiece.getAllActivePieces()
+            all.forEach(piece => {
+                if (piece.color == turn && piece.actPoints > 0) {
+                    document.getElementById(piece.position).style.backgroundColor = '#D8B93C';
+                }
+            })
+        }
+
+        function toggleRules() {
+            const ruleScreen = document.getElementById("rules")
+            if (ruleScreen.style.display == 'none') {
+                ruleScreen.style.display = 'block';
+            }
+            else {
+                ruleScreen.style.display = 'none';
+            }
+        }
+
+        function checkGameOver() {
+            const allPieces = chessPiece.getAllActivePieces()
+            if (!(allPieces.includes(whiteKing) && allPieces.includes(whiteQueen))) {
+                gameOver = true
+                winner = 'Black'
+            }
+            if (!(allPieces.includes(blackKing) && allPieces.includes(blackQueen))) {
+                gameOver = true
+                winner = 'White'
+            }
+        }
+
+        function updateActPoints() {
+            let allPieces = chessPiece.getAllActivePieces();
+            for (let iterable of allPieces) {
+                const max = iterable._maxAct
+                if (iterable.actPoints != null || iterable.actPoints != undefined) {
+                    iterable.actPoints = max;
+                }
+            }
+        }
+
+        function updateGameInfo() {
+            console.log("Next turn")
+            checkGameOver();
+            if (gameOver) {
+                document.getElementById('gameOver').style.display = 'block';
+                document.getElementById('winner').style.display = 'block';
+                document.getElementById('winner').textContent = `Winner: ${winner}`;
+            } else {
+                document.getElementById('gameOver').style.display = 'none';
+                document.getElementById('winner').style.display = 'none';
+            }
+            if (turn === 'white') {
+                turn = 'black';
+            } else {
+                turn = 'white';
+            }
+            numTurns++;
+            document.getElementById('turn').textContent = turn.charAt(0).toUpperCase() + turn.slice(1);
+            document.getElementById('numTurns').textContent = numTurns;
+            updateActPoints();
+            // for villages (to spawn pawns)
+
+            let all = chessPiece.getAllActivePieces()
+            all.forEach(piece => {
+                if (piece.name === "Village") {
+                    piece.spawnPawn();
+                }
+            })
+        }
+        // last function to start the game
+        function startGame() {
+            if (gameStarted) {
+                alert("Game already started!");
+                return;
+            }
+            gameStarted = true;
+            // Initialize pieces on the board
+            for (let i = 0; i < chessPiece.allPieces.length; i++) {
+                const piece = chessPiece.allPieces[i];
+                const square = document.getElementById(piece.position);
+                if (square) {
+                    square.innerHTML = piece.symbol;
+                    square.style.color = piece.color === 'white' ? '#fff' : '#000';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
