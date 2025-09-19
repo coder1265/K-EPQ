@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shogi - chess variant</title>
+    <style>
+        * {
+            font-family: 'Courier New', Courier, monospace;
+            color: black;
+            --size: min(100vw, 100vh);
+            --squaresize: min(10.4vh, 10.4vw)
+        }
+
+        main {
+            background-color: azure;
+            padding: 5px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .row {
+            display: flex;
+            width: var(--size);
+            height: min(10.5vh, 10.5vw);
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .square {
+            align-self: center;
+            display: inline-flex;
+            width: var(--squaresize);
+            height: var(--squaresize);
+            text-align: center;
+            padding: 5px;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+        #screen-size {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: antiquewhite;
+            z-index: 1000;
+        }
+
+        #drop-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: antiquewhite;
+            z-index: 2;
+        }
+
+        @media screen and (max-width: 400px) {
+            #screen-size {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section id="screen-size">
+        <h1>Sorry your screen is too small</h1>
+    </section>
+    <section id="drop-overlay">
+        <h2>Select piece to drop.</h2>
+        <ul>
+            <li onclick="dropPiece('B Pawn')">B Pawn</li>
+            <li onclick="dropPiece('B Lance')">B Lance</li>
+            <li onclick="dropPiece('B Knight')">B Knight</li>
+            <li onclick="dropPiece('B Silver General')">B Silver General</li>
+            <li onclick="dropPiece('B Gold General')">B Gold General</li>
+            <li onclick="dropPiece('B Bishop')">B Bishop</li>
+            <li onclick="dropPiece('B Rook')">B Rook</li>
+            <li onclick="dropPiece('W Pawn')">W Pawn</li>
+            <li onclick="dropPiece('W Lance')">W Lance</li>
+            <li onclick="dropPiece('W Knight')">W Knight</li>
+            <li onclick="dropPiece('W Silver General')">W Silver General</li>
+            <li onclick="dropPiece('W Gold General')">W Gold General</li>
+            <li onclick="dropPiece('W Bishop')">W Bishop</li>
+            <li onclick="dropPiece('W Rook')">W Rook</li>
+        </ul>
+    </section>
+    <main id="board">
+        <div class="row" id="row1">
+            <div class="square" id="11">B Lance</div>
+            <div class="square" id="12">B Knight</div>
+            <div class="square" id="13">B Silver General</div>
+            <div class="square" id="14">B Gold General</div>
+            <div class="square" id="15">B King</div>
+            <div class="square" id="16">B Gold General</div>
+            <div class="square" id="17">B Silver General</div>
+            <div class="square" id="18">B Knight</div>
+            <div class="square" id="19">B Lance</div>
+        </div>
+        <div class="row" id="row2">
+            <div class="square" id="21"></div>
+            <div class="square" id="22">B Rook</div>
+            <div class="square" id="23"></div>
+            <div class="square" id="24"></div>
+            <div class="square" id="25"></div>
+            <div class="square" id="26"></div>
+            <div class="square" id="27"></div>
+            <div class="square" id="28">B Bishop</div>
+            <div class="square" id="29"></div>
+        </div>
+        <div class="row" id="row3">
+            <div class="square" id="31">B Pawn</div>
+            <div class="square" id="32">B Pawn</div>
+            <div class="square" id="33">B Pawn</div>
+            <div class="square" id="34">B Pawn</div>
+            <div class="square" id="35">B Pawn</div>
+            <div class="square" id="36">B Pawn</div>
+            <div class="square" id="37">B Pawn</div>
+            <div class="square" id="38">B Pawn</div>
+            <div class="square" id="39">B Pawn</div>
+        </div>
+        <div class="row" id="row4">
+            <div class="square" id="41"></div>
+            <div class="square" id="42"></div>
+            <div class="square" id="43"></div>
+            <div class="square" id="44"></div>
+            <div class="square" id="45"></div>
+            <div class="square" id="46"></div>
+            <div class="square" id="47"></div>
+            <div class="square" id="48"></div>
+            <div class="square" id="49"></div>
+        </div>
+        <div class="row" id="row5">
+            <div class="square" id="51"></div>
+            <div class="square" id="52"></div>
+            <div class="square" id="53"></div>
+            <div class="square" id="54"></div>
+            <div class="square" id="55"></div>
+            <div class="square" id="56"></div>
+            <div class="square" id="57"></div>
+            <div class="square" id="58"></div>
+            <div class="square" id="59"></div>
+        </div>
+        <div class="row" id="row6">
+            <div class="square" id="61"></div>
+            <div class="square" id="62"></div>
+            <div class="square" id="63"></div>
+            <div class="square" id="64"></div>
+            <div class="square" id="65"></div>
+            <div class="square" id="66"></div>
+            <div class="square" id="67"></div>
+            <div class="square" id="68"></div>
+            <div class="square" id="69"></div>
+        </div>
+        <div class="row" id="row7">
+            <div class="square" id="71">W Pawn</div>
+            <div class="square" id="72">W Pawn</div>
+            <div class="square" id="73">W Pawn</div>
+            <div class="square" id="74">W Pawn</div>
+            <div class="square" id="75">W Pawn</div>
+            <div class="square" id="76">W Pawn</div>
+            <div class="square" id="77">W Pawn</div>
+            <div class="square" id="78">W Pawn</div>
+            <div class="square" id="79">W Pawn</div>
+        </div>
+        <div class="row" id="row8">
+            <div class="square" id="81"></div>
+            <div class="square" id="82">W Bishop</div>
+            <div class="square" id="83"></div>
+            <div class="square" id="84"></div>
+            <div class="square" id="85"></div>
+            <div class="square" id="86"></div>
+            <div class="square" id="87"></div>
+            <div class="square" id="88">W Rook</div>
+            <div class="square" id="89"></div>
+        </div>
+        <div class="row" id="row9">
+            <div class="square" id="91">W Lance</div>
+            <div class="square" id="92">W Knight</div>
+            <div class="square" id="93">W Silver General</div>
+            <div class="square" id="94">W Gold General</div>
+            <div class="square" id="95">W King</div>
+            <div class="square" id="96">W Gold General</div>
+            <div class="square" id="97">W Silver General</div>
+            <div class="square" id="98">W Knight</div>
+            <div class="square" id="99">W Lance</div>
+        </div>
+    </main>
+    <script>
+        let selected, selectedSquare, over;
+        alert("press 'p' to place / drop a piece, press 'o' to premote the selected piece. \nLink to rules: https://shogi.cz/en/game-rules/ or https://en.wikipedia.org/wiki/Shogi#Rules")
+        document.addEventListener("keypress", (e) => {
+            if (e.key === "p" || e.key === "P") {
+                over = document.getElementById("drop-overlay")
+                if (over.style.display === "none") {
+                    over.style.display = "block";
+                } else {
+                    over.style.display = "none"
+                }
+            } else if (e.key === "o" || e.key === "O") {
+                if (selected) {
+                    let oldText = selectedSquare.innerText
+                    let letter1 = oldText.charAt(0)
+                    if (letter1 === "B" || letter1 === "W") {
+                        selectedSquare.innerText = "P+" + oldText
+                    } else {
+                        selectedSquare.innerText = oldText.slice(2)
+                    }
+                    console.log(letter1)
+                } else {
+                    alert("no piece selected")
+                }
+            }
+        });
+
+        document.getElementById("board").addEventListener("click", (e) => {
+            if (parseInt(e.target.id)) {
+                if (!selected && e.target.innerText != "") {
+                    selected = true;
+                    selectedSquare = e.target
+                    selectedSquare.style.backgroundColor = "yellow";
+                } else {
+                    if (selectedSquare != e.target && selectedSquare) {
+                        e.target.innerText = selectedSquare.innerText;
+                        selectedSquare.innerText = null;
+                        selectedSquare.style.backgroundColor = "azure";
+                        cancelMove();
+                    } else if (isDropping) {
+                        e.target.innerText = isDropping;
+                        isDropping = undefined;
+                        cancelMove();
+                    }
+                }
+            } else {
+                cancelMove();
+                isDropping = undefined;
+            }
+        })
+
+        function dropPiece(pieceName) {
+            if (selected) cancelMove();
+            over.style.display = "none"
+            selected = true;
+            isDropping = pieceName;
+        }
+        function cancelMove() {
+            selected = null;
+            if (selectedSquare) {
+                selectedSquare.style.backgroundColor = "azure";
+                selectedSquare = null;
+            }
+        }
+    </script>
+</body>
+
+</html>
