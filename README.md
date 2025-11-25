@@ -12,7 +12,9 @@ Alternative to white(#ffffff) is #f5f5f5 as it is less sharp
 
 Suggested improvements:
 curvy breaks between sections - try out SGV's
-a cookie acceptance modal and in bottom left corner to change preferences
 Responsive design
+Higher SEO
+Add eastereggs such as komani code to make a pop up
+Sitemap
 
 On V2 build mobile first then expand rather than condense
