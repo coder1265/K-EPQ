@@ -1,4 +1,5 @@
 # K-EPQ
+
 My EPQ static site for selling eggs
 Would have login feature (however no server side so not possible)
 Color scheme:
@@ -15,6 +16,5 @@ curvy breaks between sections - try out SGV's
 Responsive design
 Higher SEO
 Add eastereggs such as komani code to make a pop up
-Sitemap
 
 On V2 build mobile first then expand rather than condense
