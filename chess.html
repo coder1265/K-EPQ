@@ -128,6 +128,7 @@
             Pieces communication Range (disabled)</button>
         <button type="button" id="endTurn" class="turn-option" onclick="updateGameInfo();">end your
             turn</button>
+        <button type="button" id="missionStart" onclick="assignAMission()">Assign a Mission</button>
     </div>
     <div id="chess-board">
 
@@ -858,6 +859,11 @@
                     square.style.color = piece.color === 'white' ? '#fff' : '#000';
                 }
             }
+        }
+        async function assignAMission() {
+            await document.addEventListener("click",()=>{
+                console.log("Click after a mission.")
+            })
         }
     </script>
 </body>
