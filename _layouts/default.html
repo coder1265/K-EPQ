@@ -24,13 +24,24 @@
     <link rel="icon" type="image/png" href="Images/android-chrome-512x512.png" />
     <link href="CSS/main.css" rel="stylesheet" type="text/css" />
     <script src="js/main.js"></script>
+    {% if page.custom_css %}
+    {% for file in page.custom_css %}
+    <link rel="stylesheet" href="{{ file }}">
+    {% endfor %}
+    {% endif %}
+
+    {% if page.custom_js %}
+    {% for file in page.custom_js %}
+    <script src="{{ file }}"></script>
+    {% endfor %}
+    {% endif %}
 
 </head>
 
 <body>
 
     {% include header.html %}
-
+    {% include cookie_part.html %}
     <main>
         {{ content }}
     </main>
