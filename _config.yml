@@ -1,0 +1,17 @@
+title: "Lancaster Produce"
+description: "Lancaster Produce | Eggs and other products for sale"
+baseurl: ""
+url: "https://lancasterproduce.com/"
+company_name: "Lancaster Produce"
+
+# Default layout for all pages
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Plugins (GitHub Pages–safe)
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
