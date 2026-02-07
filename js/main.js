@@ -108,4 +108,32 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
   checkCookieAcceptance("cookie-consent");
+
+  // Konami code: Up, Up, Down, Down, Left, Right, Left, Right
+  let pressedKeys = [];
+  document.addEventListener("keyup", (event) => {
+    if (event.key === "ArrowUp") pressedKeys.push("ArrowUp");
+    if (event.key === "ArrowDown") pressedKeys.push("ArrowDown");
+    if (event.key === "ArrowLeft") pressedKeys.push("ArrowLeft");
+    if (event.key === "ArrowRight") {
+      pressedKeys.push("ArrowRight");
+      let lastEightKeys = pressedKeys.slice(-8);
+      if (
+        JSON.stringify(lastEightKeys) ===
+        JSON.stringify([
+          "ArrowUp",
+          "ArrowUp",
+          "ArrowDown",
+          "ArrowDown",
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowLeft",
+          "ArrowRight",
+        ])
+      ) {
+        alert("Konami code entered!");
+        pressedKeys = [];
+      }
+    }
+  });
 });

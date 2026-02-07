@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-08P5BXDT1F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "G-08P5BXDT1F");
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% seo %}
+    <link rel="icon" href="Images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="Images/favicon-32x32.png" type="image/png" />
+    <link rel="icon" type="image/png" href="Images/android-chrome-512x512.png" />
+    <link href="CSS/main.css" rel="stylesheet" type="text/css" />
+    <script src="js/main.js"></script>
+    {% if page.custom_css %}
+    {% for file in page.custom_css %}
+    <link rel="stylesheet" href="{{ file }}">
+    {% endfor %}
+    {% endif %}
+
+    {% if page.custom_js %}
+    {% for file in page.custom_js %}
+    <script src="{{ file }}"></script>
+    {% endfor %}
+    {% endif %}
+
+</head>
+
+<body>
+
+    {% include header.html %}
+    {% include cookie_part.html %}
+    <main class="post-container">
+        <section class="post-content">
+            {{ content }}
+        </section>
+
+        <aside class="post-sidebar" aria-label="Post navigation">
+            <h3>All posts</h3>
+            <ul class="post-list">
+                {% for post in site.posts %}
+                <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+                {% endfor %}
+
+                {% assign pages_with_post_layout = site.pages | where:"layout","post" %}
+                {% for p in pages_with_post_layout %}
+                <li><a href="{{ p.url | relative_url }}">{{ p.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </aside>
+    </main>
+
+    <button id="backToTop" aria-label="Back to top">▲</button>
+
+    <script>
+        (function () {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 300) { btn.classList.add('visible'); } else { btn.classList.remove('visible'); }
+            });
+            btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        })();
+    </script>
+
+    {% include footer.html %}
+
+</body>
+
+</html>

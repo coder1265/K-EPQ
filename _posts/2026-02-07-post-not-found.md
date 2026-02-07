@@ -1,0 +1,14 @@
+---
+title: "Post not found"
+date: 2026-02-07 13:00:00 +0000
+layout: post
+---
+
+<h1>Sorry the post you are looking for does not exist.</h1>
+<p>
+  It may have been deleted or moved. Please check the URL or return to the
+  <a href="index.html">homepage</a>.
+  <br />
+  If you wish to report this issue, please
+  <a href="contact.html">contact us</a>.
+</p>
