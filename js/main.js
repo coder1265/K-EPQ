@@ -1,4 +1,5 @@
 "use strict";
+
 window.addEventListener("DOMContentLoaded", () => {
   let isThrottled = false;
   const throttleDelay = 100; // scroll interval
@@ -6,10 +7,8 @@ window.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", (event) => {
     if (!isThrottled) {
       isThrottled = true;
-
       // Execute your scroll handling logic here
       contactScrolledBy();
-
       // After the delay, allow the function to be executed again
       setTimeout(() => {
         isThrottled = false;
@@ -17,6 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     // If isThrottled is true, the scroll event is ignored until the timeout finishes
   });
+
   const quickContactElement = document.getElementById("quick-contact");
   function contactScrolledBy() {
     if (window.scrollY > 50) {
@@ -43,9 +43,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function sidenav() {
-    console.log("sidenav has been clicked");
-  }
   document.getElementById("navMenu").addEventListener("click", () => {
     document.getElementById("sidebar").classList.remove("animation2-close");
     document.getElementById("sidebar").classList.add("animation2");

@@ -1,5 +1,4 @@
 "use strict";
-console.log("console works");
 document.addEventListener("DOMContentLoaded", () => {
   //	code for the main image carrocel
   let mainImages = [
@@ -9,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "Images/Img4.webp",
   ];
   let currentImage = mainImages.length - 1;
+  let pauseAutoRotate = false;
   function isActive(n) {
     document.getElementById("mainImage0").classList.remove("active");
     document.getElementById("mainImage1").classList.remove("active");
@@ -32,30 +32,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   document.getElementById("mainImage0").addEventListener("mousedown", () => {
-    document.getElementById(
-      "main-image"
-    ).style.backgroundImage = `url(${mainImages[0]})`;
+    document.getElementById("main-image").style.backgroundImage =
+      `url(${mainImages[0]})`;
     isActive(0);
   });
   document.getElementById("mainImage1").addEventListener("mousedown", () => {
-    document.getElementById(
-      "main-image"
-    ).style.backgroundImage = `url(${mainImages[1]})`;
+    document.getElementById("main-image").style.backgroundImage =
+      `url(${mainImages[1]})`;
     isActive(1);
   });
   document.getElementById("mainImage2").addEventListener("mousedown", () => {
-    document.getElementById(
-      "main-image"
-    ).style.backgroundImage = `url(${mainImages[2]})`;
+    document.getElementById("main-image").style.backgroundImage =
+      `url(${mainImages[2]})`;
     isActive(2);
   });
   document.getElementById("mainImage3").addEventListener("mousedown", () => {
-    document.getElementById(
-      "main-image"
-    ).style.backgroundImage = `url(${mainImages[3]})`;
+    document.getElementById("main-image").style.backgroundImage =
+      `url(${mainImages[3]})`;
     isActive(3);
   });
-
+  // left and right buttons for the main image
   document.getElementById("leftImage").addEventListener("click", () => {
     if (currentImage > 0) {
       currentImage--;
@@ -63,9 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
       currentImage = mainImages.length - 1;
     }
     isActive(currentImage);
-    document.getElementById(
-      "main-image"
-    ).style.backgroundImage = `url(${mainImages[currentImage]})`;
+    document.getElementById("main-image").style.backgroundImage =
+      `url(${mainImages[currentImage]})`;
   });
   document.getElementById("rightImage").addEventListener("mousedown", () => {
     if (currentImage < mainImages.length - 1) {
@@ -74,22 +69,38 @@ document.addEventListener("DOMContentLoaded", () => {
       currentImage = 0;
     }
     isActive(currentImage);
-    document.getElementById(
-      "main-image"
-    ).style.backgroundImage = `url(${mainImages[currentImage]})`;
+    document.getElementById("main-image").style.backgroundImage =
+      `url(${mainImages[currentImage]})`;
   });
 
+  // Pause automatic rotation while pointer is over left/right controls
+  const leftBtn = document.getElementById("leftImage");
+  const rightBtn = document.getElementById("rightImage");
+  if (leftBtn) {
+    leftBtn.addEventListener("pointerenter", () => (pauseAutoRotate = true));
+    leftBtn.addEventListener("pointerleave", () => (pauseAutoRotate = false));
+    leftBtn.addEventListener("focus", () => (pauseAutoRotate = true));
+    leftBtn.addEventListener("blur", () => (pauseAutoRotate = false));
+  }
+  if (rightBtn) {
+    rightBtn.addEventListener("pointerenter", () => (pauseAutoRotate = true));
+    rightBtn.addEventListener("pointerleave", () => (pauseAutoRotate = false));
+    rightBtn.addEventListener("focus", () => (pauseAutoRotate = true));
+    rightBtn.addEventListener("blur", () => (pauseAutoRotate = false));
+  }
+
   function changeImage() {
+    if (pauseAutoRotate) return;
     if (currentImage < mainImages.length - 1) {
       currentImage++;
     } else if (currentImage === mainImages.length - 1) {
       currentImage = 0;
     }
     isActive(currentImage);
-    document.getElementById(
-      "main-image"
-    ).style.backgroundImage = `url(${mainImages[currentImage]})`;
+    document.getElementById("main-image").style.backgroundImage =
+      `url(${mainImages[currentImage]})`;
   }
+  
   setInterval(changeImage, 10000);
   document.getElementById("easterEgg1").addEventListener("click", function () {
     let ans = prompt("please enter code:");
@@ -123,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   const newsLinks = document.querySelectorAll(
-    "#news1-link, #news2-link, #news3-link"
+    "#news1-link, #news2-link, #news3-link",
   );
   newsLinks.forEach((link) => {
     link.addEventListener("click", function (event) {
