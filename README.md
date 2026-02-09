@@ -31,3 +31,6 @@ On V2 build mobile first then expand rather than condense:
 Break points are:
 600px,
 1024px
+
+To do:
+use existing cookie svg to make a corner tab for mobile devices.
