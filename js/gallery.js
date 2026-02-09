@@ -28,6 +28,7 @@ const images = [
   "chicken-profiles/Chicken16.jpg",
   "chicken-profiles/Chicken17.jpg",
 ];
+document.addEventListener('DOMContentLoaded', function() {
 for (let i = 0; i < images.length; i++) {
   const img = document.createElement("img");
   img.src = `/Images/${images[i]}`;
@@ -43,3 +44,4 @@ for (let i = 0; i < images.length; i++) {
   document.getElementById("gallery").appendChild(img);
   console.log(`Image: ${img}`);
 }
+})
