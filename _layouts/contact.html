@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      emailjs.init("k1SzzLOKSMwnPKq2J");
+    </script>
+    <script src="js/sendEmail.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-08P5BXDT1F"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+
+        gtag("config", "G-08P5BXDT1F");
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% seo %}
+    <link rel="icon" href="Images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="Images/favicon-32x32.png" type="image/png" />
+    <link rel="icon" type="image/png" href="Images/android-chrome-512x512.png" />
+    <link href="CSS/main.css" rel="stylesheet" type="text/css" />
+    <script src="js/main.js"></script>
+    {% if page.custom_css %}
+    {% for file in page.custom_css %}
+    <link rel="stylesheet" href="{{ file }}">
+    {% endfor %}
+    {% endif %}
+
+    {% if page.custom_js %}
+    {% for file in page.custom_js %}
+    <script src="{{ file }}"></script>
+    {% endfor %}
+    {% endif %}
+
+</head>
+
+<body>
+
+    {% include header.html %}
+    {% include cookie_part.html %}
+    <main>
+        {{ content }}
+    </main>
+
+    {% include footer.html %}
+
+</body>
+
+</html>

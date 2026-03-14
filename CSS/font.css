@@ -1,0 +1,12 @@
+      @font-face {
+        font-family: "mv_boliregular";
+        src: url("/CSS/mvboli-webfont.woff") format("woff");
+        font-weight: normal;
+        font-style: normal;
+      }
+      h1 {
+        font-family: "mv_boliregular";
+        color: #aaa;
+        font-weight: normal;
+        font-style: normal;
+      }
